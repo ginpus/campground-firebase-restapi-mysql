@@ -1,3 +1,4 @@
+using Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Persistence;
 using RestAPI.Client;
 using RestAPI.Options;
 using System;
@@ -29,6 +31,7 @@ namespace RestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IUserService, UserService>();
 
             services.Configure<ApiKeySettings>(Configuration.GetSection("ApiKeySettings"));
 
@@ -43,6 +46,8 @@ namespace RestAPI
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 options.JsonSerializerOptions.IgnoreNullValues = true;
             });
+
+            services.AddPersistence(Configuration);
 
             services.AddSwaggerGen(c =>
             {

@@ -5,7 +5,17 @@
       "ProjectGuid": "4414cd80-3ebc-4030-b069-cf44499c7da0",
       "DisplayName": "RestAPI",
       "ColorIndex": 0
+    },
+    "35dcd71d-c1a6-4e6f-b6c0-18e69e4068ef": {
+      "ProjectGuid": "35dcd71d-c1a6-4e6f-b6c0-18e69e4068ef",
+      "DisplayName": "Domain",
+      "ColorIndex": 1
+    },
+    "222dec40-94a8-4267-88b7-1e0d75e845cc": {
+      "ProjectGuid": "222dec40-94a8-4267-88b7-1e0d75e845cc",
+      "DisplayName": "Persistence",
+      "ColorIndex": 2
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 3
 }

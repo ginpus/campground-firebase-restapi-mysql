@@ -10,3 +10,6 @@ C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\Doma
 C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\Domain\obj\Debug\net5.0\Domain.dll
 C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\Domain\obj\Debug\net5.0\ref\Domain.dll
 C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\Domain\obj\Debug\net5.0\Domain.pdb
+C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\Domain\bin\Debug\net5.0\Persistence.dll
+C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\Domain\bin\Debug\net5.0\Persistence.pdb
+C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\Domain\obj\Debug\net5.0\Domain.csproj.CopyComplete
