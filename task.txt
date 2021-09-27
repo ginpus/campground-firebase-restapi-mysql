@@ -1,0 +1,38 @@
+- Sukurti aplikacija "Campgrounds app"
+- Duomenis saugome Sql duomenu bazeje
+
+ 
+
+RestAPI turi leisti:
+   - CRUD Campgrounds
+   - CRUD Comments
+
+ 
+
+Pavyzdinis: "Comment" modelis:
+   - Id
+   - CampgroundId
+   - Rating (1-5)
+   - Text
+   - UserId
+   - DateCreated
+   
+Pavyzdinis: "Campground" modelis:
+   - Id
+   - UserId
+   - Name
+   - Price
+   - Description
+   
+Pavyzdinis: "Image" modelis:
+   - Id
+   - CampgroundId
+   - Url
+
+ 
+
+Autentifikacija:
+    Useris prisijungia su Username ir Password
+    Authentikacijai naudoti www.firebase.com
+Autorizacija:
+    Useris gali atlikti CRUD operacijas tik su tais resursais, kuriuos pats sukure
