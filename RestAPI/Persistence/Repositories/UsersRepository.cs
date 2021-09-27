@@ -43,13 +43,13 @@ namespace Persistence.Repositories
             return users;
         }
 
-        public async Task<UserReadModel> GetUserAsync(string email)
+        public async Task<UserReadModel> GetUserAsync(string localId)
         {
-            var sqlSelect = $"SELECT userid, email, localid, datecreated FROM {UsersTable} where email = @email";
+            var sqlSelect = $"SELECT userid, email, localid, datecreated FROM {UsersTable} where localid = @localid";
 
             var user = await _sqlClient.QuerySingleOrDefaultAsync<UserReadModel>(sqlSelect, new
             {
-                email = email
+                localid = localId
             });
 
             return user;

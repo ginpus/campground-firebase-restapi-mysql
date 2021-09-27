@@ -11,5 +11,7 @@ namespace Domain.Services
     public interface IUserService
     {
         Task<UserResponseModel> SaveUserAsync(UserRequestModel user);
+
+        Task<UserResponseModel> GetUserAsync(string localId);
     }
 }

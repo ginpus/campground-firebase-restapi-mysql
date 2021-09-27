@@ -10,7 +10,7 @@ namespace Persistence.Repositories
 {
     public interface IUsersRepository
     {
-        Task<UserReadModel> GetUserAsync(string email);
+        Task<UserReadModel> GetUserAsync(string localId);
 
         Task<int> CreateUserAysnc(UserWriteModel user);
 

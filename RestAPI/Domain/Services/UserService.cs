@@ -18,6 +18,13 @@ namespace Domain.Services
             _usersRepository = usersRepository;
         }
 
+        public async Task<UserResponseModel> GetUserAsync(string localId)
+        {
+            var user = await _usersRepository.GetUserAsync(localId);
+
+            return user.AsDto();
+        }
+
         public async Task<UserResponseModel> SaveUserAsync(UserRequestModel user)
         {
             var userToSave = new UserResponseModel
