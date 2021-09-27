@@ -34,6 +34,7 @@ namespace RestAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<ICampgroundsService, CampgroundsService>();
 
             services.Configure<ApiKeySettings>(Configuration.GetSection("ApiKeySettings"));
 

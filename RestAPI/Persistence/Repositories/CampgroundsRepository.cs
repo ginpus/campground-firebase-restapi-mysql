@@ -87,7 +87,7 @@ namespace Persistence.Repositories
 
         public async Task<int> SaveAsync(CampgroundWriteModel campground)
         {
-            var sqlInsert = @$"INSERT INTO {CampgroundsTable} (campgroundid, userid, name, price, description, datecreated) VALUES(@campgroundid, @userid, @name, @price, @description,@ datecreated)";
+            var sqlInsert = @$"INSERT INTO {CampgroundsTable} (campgroundid, userid, name, price, description, datecreated) VALUES(@campgroundid, @userid, @name, @price, @description, @datecreated)";
             var rowsAffected = _sqlClient.ExecuteAsync(sqlInsert, new
             {
                 campgroundid = campground.CampgroundId,
@@ -102,8 +102,8 @@ namespace Persistence.Repositories
 
         public async Task<int> SaveOrUpdate(CampgroundWriteModel campground)
         {
-            var sql = @$"INSERT INTO {CampgroundsTable} (campgroundid, userid, name, price, description, datecreated) VALUES(@campgroundid, @userid, @name, @price, @description,@ datecreated) ON DUPLICATE KEY UPDATE name = @name, description = @description, price = @price";
-            
+            var sql = @$"INSERT INTO {CampgroundsTable} (campgroundid, userid, name, price, description, datecreated) VALUES(@campgroundid, @userid, @name, @price, @description, @datecreated) ON DUPLICATE KEY UPDATE name = @name, description = @description, price = @price";
+
             var rowsAffected = _sqlClient.ExecuteAsync(sql, new
             {
                 campgroundid = campground.CampgroundId,
