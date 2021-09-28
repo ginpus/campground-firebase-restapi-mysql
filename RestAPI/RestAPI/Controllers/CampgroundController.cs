@@ -8,6 +8,7 @@ using Persistence.Repositories;
 using RestAPI.Client;
 using RestAPI.Client.Models.ResponseModels;
 using RestAPI.Models.RequestModels;
+using RestAPI.Models.ResponseModels;
 using RestAPI.Options;
 using System;
 using System.Collections.Generic;
@@ -42,9 +43,6 @@ namespace RestAPI.Controllers
 
             var user = await _userService.GetUserAsync(userId.Value);
 
-            Console.WriteLine($"LocalID: {userId.Value}");
-            Console.WriteLine($"UserID: {user.UserId}");
-
             var newCampground = await _campgroundsService.CreateAsync(new CampgroundRequestModel
             {
                 CampgroundId = Guid.NewGuid(),
@@ -56,6 +54,51 @@ namespace RestAPI.Controllers
             });
 
             return newCampground;
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IEnumerable<GetCampgroundResponse>> GetAllCampgrounds()
+        {
+            var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
+
+/*            if (userId is null)
+            {
+                return NotFound();
+            }*/
+
+            var user = await _userService.GetUserAsync(userId.Value);
+
+            var allCampgrounds = (await _campgroundsService.GetAllUserItemsAsync(user.UserId))
+                .Select(campground => new GetCampgroundResponse
+                {
+                    CampgroundId = campground.CampgroundId,
+                    UserId = campground.UserId,
+                    Name = campground.Name,
+                    Price = campground.Price,
+                    Description = campground.Description,
+                    DateCreated = campground.DateCreated
+                });
+
+            return allCampgrounds;
+        }
+
+        [HttpDelete]
+        [Authorize]
+        public async Task<ActionResult<int>> DeleteAllCampgrounds()
+        {
+            var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
+
+            if (userId is null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userService.GetUserAsync(userId.Value);
+
+            var entriesDeleted = await _campgroundsService.DeleteAllAsync(user.UserId);
+
+            return entriesDeleted;
         }
     }
 }

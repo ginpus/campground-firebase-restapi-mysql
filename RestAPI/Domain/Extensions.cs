@@ -46,5 +46,18 @@ namespace Domain
                 DateCreated = campground.DateCreated
             };
         }
+
+        public static CampgroundResponseModel AsDto(this CampgroundReadModel campground)
+        {
+            return new CampgroundResponseModel
+            {
+                CampgroundId = campground.CampgroundId,
+                UserId = campground.UserId,
+                Name = campground.Name,
+                Price = campground.Price,
+                Description = campground.Description,
+                DateCreated = campground.DateCreated
+            };
+        }
     }
 }

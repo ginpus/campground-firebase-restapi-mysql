@@ -37,9 +37,12 @@ namespace Domain.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<CampgroundResponseModel>> GetAllUserItemsAsync(Guid userid)
+        public async Task<IEnumerable<CampgroundResponseModel>> GetAllUserItemsAsync(Guid userid)
         {
-            throw new NotImplementedException();
+            var allItems = (await _campgroundsRepository.GetAllUserItemsAsync(userid))
+                .Select(item => item.AsDto());
+
+            return allItems;
         }
 
         public Task<CampgroundResponseModel> GetItemByIdAsync(Guid campgroundid, Guid userid)
