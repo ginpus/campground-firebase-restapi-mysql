@@ -27,7 +27,7 @@ namespace Domain.Services
 
         public Task<int> DeleteAsync(Guid campgroundid, Guid userid)
         {
-            var rowsAffected = _campgroundsRepository.DeleteAsync(userid, campgroundid);
+            var rowsAffected = _campgroundsRepository.DeleteAsync(campgroundid, userid);
 
             return rowsAffected;
         }

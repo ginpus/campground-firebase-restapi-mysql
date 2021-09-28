@@ -33,24 +33,9 @@ namespace RestAPI.Controllers
 
         [HttpPost]
         [Route("signUp")]
-        [Authorize] // needed to force authorization
+
         public async Task<ActionResult<CreateUserResponse>> CreateUser(string email, string password)
         {
-            //------------------------ START OF AUTHORIZATION DATA COLLECTION --------------------------------
-            var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
-
-            if (userId is null)
-            {
-                return NotFound();
-            }
-
-            var user = await _userService.GetUserAsync(userId.Value);
-
-            Console.WriteLine($"LocalID: {userId.Value}");
-            Console.WriteLine($"UserID: {user.UserId}");
-
-            //------------------------ END OF AUTHORIZATION DATA COLLECTION --------------------------------
-
             var newUser = await _authClient.CreateUserAsync(email, password);
             await _userService.SaveUserAsync(new UserRequestModel
             {

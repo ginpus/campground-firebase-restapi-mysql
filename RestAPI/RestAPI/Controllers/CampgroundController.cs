@@ -62,10 +62,10 @@ namespace RestAPI.Controllers
         {
             var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
 
-/*            if (userId is null)
-            {
-                return NotFound();
-            }*/
+            /*            if (userId is null)
+                        {
+                            return NotFound();
+                        }*/
 
             var user = await _userService.GetUserAsync(userId.Value);
 
@@ -99,6 +99,25 @@ namespace RestAPI.Controllers
             var entriesDeleted = await _campgroundsService.DeleteAllAsync(user.UserId);
 
             return entriesDeleted;
+        }
+
+        [HttpDelete]
+        [Authorize]
+        [Route("{campgroundId}")]
+        public async Task<ActionResult<int>> DeleteCampground(Guid campgroundId)
+        {
+            var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
+
+            if (userId is null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userService.GetUserAsync(userId.Value);
+
+            var entryDeleted = await _campgroundsService.DeleteAsync(campgroundId, user.UserId);
+
+            return entryDeleted;
         }
     }
 }
