@@ -34,6 +34,11 @@ Pavyzdinis: "Image" modelis:
 Autentifikacija:
     Useris prisijungia su Username ir Password
     Authentikacijai naudoti www.firebase.com
+- Reset password
+- Verify email
+- Change email
+- Change password
+
 Autorizacija:
     Useris gali atlikti CRUD operacijas tik su tais resursais, kuriuos pats sukure
 

@@ -16,10 +16,6 @@ namespace Persistence.Repositories
 
         Task<IEnumerable<CampgroundReadModel>> GetAllUserItemsAsync(Guid userid);
 
-        Task<int> SaveAsync(CampgroundWriteModel campground);
-
-        Task<int> EditAsync(Guid campgroundid, UpdateCampgroundWriteModel campground, Guid userid);
-
         Task<int> DeleteAsync(Guid campgroundid, Guid userid);
 
         Task<int> DeleteAllAsync(Guid userid);

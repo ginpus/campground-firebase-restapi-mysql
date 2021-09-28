@@ -45,6 +45,14 @@ namespace Domain.Services
             return allItems;
         }
 
+        public async Task<IEnumerable<CampgroundResponseModel>> GetAllItemsAsync()
+        {
+            var allItems = (await _campgroundsRepository.GetAllAsync())
+                .Select(item => item.AsDto());
+
+            return allItems;
+        }
+
         public async Task<CampgroundResponseModel> GetItemByIdAsync(Guid campgroundid, Guid userid)
         {
             var item = await _campgroundsRepository.GetItemByIdAsync(campgroundid, userid);

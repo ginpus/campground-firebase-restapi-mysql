@@ -60,7 +60,8 @@ namespace RestAPI.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<CampgroundResponse>>> GetAllCampgrounds()
+        [Route("user")]
+        public async Task<ActionResult<IEnumerable<CampgroundResponse>>> GetAllUserCampgrounds()
         {
             var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
 
@@ -72,6 +73,24 @@ namespace RestAPI.Controllers
             var user = await _userService.GetUserAsync(userId.Value);
 
             var allCampgrounds = (await _campgroundsService.GetAllUserItemsAsync(user.UserId))
+                .Select(campground => new CampgroundResponse
+                {
+                    CampgroundId = campground.CampgroundId,
+                    UserId = campground.UserId,
+                    Name = campground.Name,
+                    Price = campground.Price,
+                    Description = campground.Description,
+                    DateCreated = campground.DateCreated
+                });
+
+            return Ok(allCampgrounds);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<CampgroundResponse>>> GetAllCampgrounds()
+        {
+            var allCampgrounds = (await _campgroundsService.GetAllItemsAsync())
                 .Select(campground => new CampgroundResponse
                 {
                     CampgroundId = campground.CampgroundId,
