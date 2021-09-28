@@ -1,6 +1,6 @@
 ﻿namespace RestAPI.Models.RequestModels
 {
-    public class CampgroundCreateRequest
+    public class CampgroundCreateorUpdateRequest
     {
         public string Name { get; set; }
 

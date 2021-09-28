@@ -34,24 +34,13 @@ namespace Persistence.Repositories
         {
             var sqlDelete = $"DELETE FROM {CampgroundsTable} WHERE campgroundid = @campgroundid AND userid = @userid";
 
+            Console.WriteLine($"CampgroundId: {campgroundid}");
+            Console.WriteLine($"UserID: {userid}");
+            Console.WriteLine($"SQL: {sqlDelete}");
+
             var rowsAffected = await _sqlClient.ExecuteAsync(sqlDelete, new
             {
                 campgroundid = campgroundid,
-                userid = userid
-            });
-            return rowsAffected;
-        }
-
-        public async Task<int> EditAsync(Guid campgroundid, UpdateCampgroundWriteModel campground, Guid userid)
-        {
-            var sqlUpdate = $"UPDATE {CampgroundsTable} SET name = @name, description = @description, price = @price  where campgroundid = @campgroundid AND userid = @userid";
-
-            var rowsAffected = await _sqlClient.ExecuteAsync(sqlUpdate, new
-            {
-                campgroundid = campgroundid,
-                name = campground.Name,
-                description = campground.Description,
-                price = campground.Price,
                 userid = userid
             });
             return rowsAffected;
@@ -83,21 +72,6 @@ namespace Persistence.Repositories
                 campgroundid = campgroundid,
                 userid = userid
             });
-        }
-
-        public async Task<int> SaveAsync(CampgroundWriteModel campground)
-        {
-            var sqlInsert = @$"INSERT INTO {CampgroundsTable} (campgroundid, userid, name, price, description, datecreated) VALUES(@campgroundid, @userid, @name, @price, @description, @datecreated)";
-            var rowsAffected = _sqlClient.ExecuteAsync(sqlInsert, new
-            {
-                campgroundid = campground.CampgroundId,
-                userid = campground.UserId,
-                name = campground.Name,
-                price = campground.Price,
-                description = campground.Description,
-                datecreated = campground.DateCreated
-            });
-            return await rowsAffected;
         }
 
         public async Task<int> SaveOrUpdate(CampgroundWriteModel campground)

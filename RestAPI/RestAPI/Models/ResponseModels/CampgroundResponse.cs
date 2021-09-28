@@ -2,7 +2,7 @@
 
 namespace RestAPI.Models.ResponseModels
 {
-    public class GetCampgroundResponse
+    public class CampgroundResponse
     {
         public Guid CampgroundId { get; set; }
 

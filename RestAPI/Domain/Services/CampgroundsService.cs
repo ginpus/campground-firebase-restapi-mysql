@@ -18,21 +18,21 @@ namespace Domain.Services
             _campgroundsRepository = campgroundsRepository;
         }
 
-        public Task<int> DeleteAllAsync(Guid userid)
+        public async Task<int> DeleteAllAsync(Guid userid)
         {
-            var rowsAffected = _campgroundsRepository.DeleteAllAsync(userid);
+            var rowsAffected = await _campgroundsRepository.DeleteAllAsync(userid);
 
             return rowsAffected;
         }
 
-        public Task<int> DeleteAsync(Guid campgroundid, Guid userid)
+        public async Task<int> DeleteAsync(Guid campgroundid, Guid userid)
         {
-            var rowsAffected = _campgroundsRepository.DeleteAsync(campgroundid, userid);
+            var rowsAffected = await _campgroundsRepository.DeleteAsync(campgroundid, userid);
 
             return rowsAffected;
         }
 
-        public Task<int> EditAsync(Guid campgroundid, UpdateCampgroundRequestModel campground, Guid userid)
+        public Task<int> EditAsync(Guid campgroundid, Guid userid, UpdateCampgroundRequestModel campground)
         {
             throw new NotImplementedException();
         }
@@ -45,12 +45,14 @@ namespace Domain.Services
             return allItems;
         }
 
-        public Task<CampgroundResponseModel> GetItemByIdAsync(Guid campgroundid, Guid userid)
+        public async Task<CampgroundResponseModel> GetItemByIdAsync(Guid campgroundid, Guid userid)
         {
-            throw new NotImplementedException();
+            var item = await _campgroundsRepository.GetItemByIdAsync(campgroundid, userid);
+
+            return item.AsDto();
         }
 
-        public Task<int> CreateAsync(CampgroundRequestModel campground)
+        public async Task<int> CreateOrEditAsync(CampgroundRequestModel campground)
         {
             var newCampground = new CampgroundRequestModel
             {
@@ -62,7 +64,7 @@ namespace Domain.Services
                 DateCreated = campground.DateCreated
             };
 
-            var rowsAffected = _campgroundsRepository.SaveOrUpdate(newCampground.AsDto());
+            var rowsAffected = await _campgroundsRepository.SaveOrUpdate(newCampground.AsDto());
 
             return rowsAffected;
         }

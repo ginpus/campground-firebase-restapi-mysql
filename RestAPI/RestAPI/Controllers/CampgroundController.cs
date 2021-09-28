@@ -32,7 +32,7 @@ namespace RestAPI.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<int>> CreateCampground(CampgroundCreateRequest campground)
+        public async Task<ActionResult<CampgroundResponse>> CreateCampground(CampgroundCreateorUpdateRequest campground)
         {
             var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
 
@@ -43,7 +43,7 @@ namespace RestAPI.Controllers
 
             var user = await _userService.GetUserAsync(userId.Value);
 
-            var newCampground = await _campgroundsService.CreateAsync(new CampgroundRequestModel
+            var newCampground = new CampgroundRequestModel
             {
                 CampgroundId = Guid.NewGuid(),
                 UserId = user.UserId,
@@ -51,26 +51,28 @@ namespace RestAPI.Controllers
                 Price = campground.Price,
                 Description = campground.Description,
                 DateCreated = DateTime.Now
-            });
+            };
 
-            return newCampground;
+            await _campgroundsService.CreateOrEditAsync(newCampground);
+
+            return newCampground.AsDto();
         }
 
         [HttpGet]
         [Authorize]
-        public async Task<IEnumerable<GetCampgroundResponse>> GetAllCampgrounds()
+        public async Task<ActionResult<IEnumerable<CampgroundResponse>>> GetAllCampgrounds()
         {
             var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
 
-            /*            if (userId is null)
-                        {
-                            return NotFound();
-                        }*/
+            if (userId is null)
+            {
+                return NotFound();
+            }
 
             var user = await _userService.GetUserAsync(userId.Value);
 
             var allCampgrounds = (await _campgroundsService.GetAllUserItemsAsync(user.UserId))
-                .Select(campground => new GetCampgroundResponse
+                .Select(campground => new CampgroundResponse
                 {
                     CampgroundId = campground.CampgroundId,
                     UserId = campground.UserId,
@@ -80,7 +82,7 @@ namespace RestAPI.Controllers
                     DateCreated = campground.DateCreated
                 });
 
-            return allCampgrounds;
+            return Ok(allCampgrounds);
         }
 
         [HttpDelete]
@@ -118,6 +120,44 @@ namespace RestAPI.Controllers
             var entryDeleted = await _campgroundsService.DeleteAsync(campgroundId, user.UserId);
 
             return entryDeleted;
+        }
+
+        [HttpPut]
+        [Authorize]
+        [Route("{campgroundId}")]
+        public async Task<ActionResult<CampgroundResponse>> EditCampground(Guid campgroundId, CampgroundCreateorUpdateRequest campground)
+        {
+            var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
+
+            if (userId is null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userService.GetUserAsync(userId.Value);
+
+            var campgroundToUpdate = await _campgroundsService.GetItemByIdAsync(campgroundId, user.UserId);
+
+            if (campgroundToUpdate is null)
+            {
+                return NotFound($"Campground item with specified id : `{campgroundId}` does not exist");
+            }
+
+            campgroundToUpdate.Name = campground.Name;
+            campgroundToUpdate.Price = campground.Price;
+            campgroundToUpdate.Description = campground.Description;
+
+            await _campgroundsService.CreateOrEditAsync(new CampgroundRequestModel
+            {
+                CampgroundId = campgroundToUpdate.CampgroundId,
+                UserId = campgroundToUpdate.UserId,
+                Name = campgroundToUpdate.Name,
+                Price = campgroundToUpdate.Price,
+                Description = campgroundToUpdate.Description,
+                DateCreated = campgroundToUpdate.DateCreated
+            });
+
+            return campgroundToUpdate.AsDto();
         }
     }
 }

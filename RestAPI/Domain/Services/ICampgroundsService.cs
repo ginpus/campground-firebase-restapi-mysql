@@ -14,9 +14,9 @@ namespace Domain.Services
 
         Task<IEnumerable<CampgroundResponseModel>> GetAllUserItemsAsync(Guid userid);
 
-        Task<int> CreateAsync(CampgroundRequestModel campground);
+        Task<int> CreateOrEditAsync(CampgroundRequestModel campground);
 
-        Task<int> EditAsync(Guid campgroundid, UpdateCampgroundRequestModel campground, Guid userid);
+        Task<int> EditAsync(Guid campgroundid, Guid userid, UpdateCampgroundRequestModel campground);
 
         Task<int> DeleteAsync(Guid campgroundid, Guid userid);
 
