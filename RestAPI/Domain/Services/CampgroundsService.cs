@@ -21,7 +21,17 @@ namespace Domain.Services
 
         public async Task<int> DeleteAllAsync(Guid userid)
         {
+            var allCampgrounds = await _campgroundsRepository.GetAllUserItemsAsync(userid);
+
             var rowsAffected = await _campgroundsRepository.DeleteAllAsync(userid);
+
+            if (rowsAffected > 0)
+            {
+                foreach (var campground in allCampgrounds)
+                {
+                    await _campgroundsRepository.DeleteAllRelatedImagesAsync(campground.CampgroundId);
+                }
+            }
 
             return rowsAffected;
         }
@@ -29,6 +39,11 @@ namespace Domain.Services
         public async Task<int> DeleteAsync(Guid campgroundid, Guid userid)
         {
             var rowsAffected = await _campgroundsRepository.DeleteAsync(campgroundid, userid);
+
+            if (rowsAffected > 0)
+            {
+                await _campgroundsRepository.DeleteAllRelatedImagesAsync(campgroundid);
+            }
 
             return rowsAffected;
         }

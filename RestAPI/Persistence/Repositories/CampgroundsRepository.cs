@@ -35,15 +35,23 @@ namespace Persistence.Repositories
         {
             var sqlDelete = $"DELETE FROM {CampgroundsTable} WHERE campgroundid = @campgroundid AND userid = @userid";
 
-            Console.WriteLine($"CampgroundId: {campgroundid}");
-            Console.WriteLine($"UserID: {userid}");
-            Console.WriteLine($"SQL: {sqlDelete}");
-
             var rowsAffected = await _sqlClient.ExecuteAsync(sqlDelete, new
             {
                 campgroundid = campgroundid,
                 userid = userid
             });
+
+            return rowsAffected;
+        }
+
+        public async Task<int> DeleteAllRelatedImagesAsync(Guid campgroundid)
+        {
+            var sqlDeleteAllImages = $"DELETE FROM {ImagesTable} WHERE campgroundid = @campgroundid";
+            var rowsAffected = await _sqlClient.ExecuteAsync(sqlDeleteAllImages, new
+            {
+                campgroundid = campgroundid
+            });
+
             return rowsAffected;
         }
 
