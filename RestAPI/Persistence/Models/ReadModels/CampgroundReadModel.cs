@@ -16,6 +16,8 @@ namespace Persistence.Models.ReadModels
 
         public double Price { get; set; }
 
+        public IEnumerable<ImageReadModel> Images { get; set; }
+
         public string Description { get; set; }
 
         public DateTime DateCreated { get; set; }

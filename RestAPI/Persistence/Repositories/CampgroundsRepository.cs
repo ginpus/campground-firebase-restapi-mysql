@@ -44,6 +44,18 @@ namespace Persistence.Repositories
             return rowsAffected;
         }
 
+        public async Task<int> DeleteImageAsync(Guid imageid)
+        {
+            var sqlDelete = $"DELETE FROM {ImagesTable} WHERE imageid = @imageid";
+
+            var rowsAffected = await _sqlClient.ExecuteAsync(sqlDelete, new
+            {
+                imageid = imageid
+            });
+
+            return rowsAffected;
+        }
+
         public async Task<int> DeleteAllRelatedImagesAsync(Guid campgroundid)
         {
             var sqlDeleteAllImages = $"DELETE FROM {ImagesTable} WHERE campgroundid = @campgroundid";

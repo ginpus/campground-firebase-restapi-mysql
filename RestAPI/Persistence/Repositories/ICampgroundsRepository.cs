@@ -27,5 +27,7 @@ namespace Persistence.Repositories
         Task<int> DeleteAllRelatedImagesAsync(Guid campgroundid);
 
         Task<int> SaveOrUpdateImageAsync(ImageWriteModel image);
+
+        Task<int> DeleteImageAsync(Guid imageid);
     }
 }

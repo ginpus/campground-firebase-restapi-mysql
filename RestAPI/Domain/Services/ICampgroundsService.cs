@@ -25,5 +25,7 @@ namespace Domain.Services
         Task<int> DeleteAllAsync(Guid userid);
 
         Task<ImageResponseModel> CreateOrEditImageAsync(ImageRequestModel image, Guid userId);
+
+        /*        Task<int> DeleteImageAsync(Guid imageid, Guid userid);*/
     }
 }

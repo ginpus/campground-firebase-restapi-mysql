@@ -167,5 +167,35 @@ namespace Domain.Services
             }
 
         }
+
+/*        public async Task<int> DeleteImageAsync(Guid imageid, Guid userid)
+        {
+            var allUserCampgrounds = (await _campgroundsRepository.GetAllUserItemsAsync(userid))
+                .ToList();
+
+            if (allUserCampgrounds is not null)
+            {
+
+                foreach (var campground in allUserCampgrounds)
+                {
+                    var imageBelongsToUser = campground.Images.FirstOrDefault(image => image.ImageId == imageid);
+
+                    if (imageBelongsToUser is not null)
+                    {
+
+                        var rowsAffected = await _campgroundsRepository.DeleteImageAsync(imageid);
+                        return rowsAffected;
+                    }
+                    else
+                    {
+                        throw new Exception("There is no such image for your user");
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception("There is no such image for your user");
+            }
+        }*/
     }
 }
