@@ -18,6 +18,8 @@ namespace Domain.Models.ResponseModels
 
         public string Description { get; set; }
 
+        public IEnumerable<ImageResponseModel> Images { get; set; }
+
         public DateTime DateCreated { get; set; }
     }
 }

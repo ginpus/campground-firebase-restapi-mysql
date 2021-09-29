@@ -12,13 +12,13 @@ namespace Domain.Services
     {
         Task<CampgroundResponseModel> GetItemByIdAsync(Guid campgroundid, Guid userid);
 
+        Task<IEnumerable<ImageResponseModel>> GetImagesByCampgroundIdAsync(Guid campgroundid);
+
         Task<IEnumerable<CampgroundResponseModel>> GetAllUserItemsAsync(Guid userid);
 
         Task<IEnumerable<CampgroundResponseModel>> GetAllItemsAsync();
 
         Task<int> CreateOrEditAsync(CampgroundRequestModel campground);
-
-        Task<int> EditAsync(Guid campgroundid, Guid userid, UpdateCampgroundRequestModel campground);
 
         Task<int> DeleteAsync(Guid campgroundid, Guid userid);
 

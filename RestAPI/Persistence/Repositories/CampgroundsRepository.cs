@@ -12,6 +12,7 @@ namespace Persistence.Repositories
     public class CampgroundsRepository : ICampgroundsRepository
     {
         private const string CampgroundsTable = "campground";
+        private const string ImagesTable = "image";
         private readonly ISqlClient _sqlClient;
 
         public CampgroundsRepository(ISqlClient sqlClient)
@@ -63,6 +64,16 @@ namespace Persistence.Repositories
             });
         }
 
+        public async Task<IEnumerable<ImageReadModel>> GetImagesByCampgroundIdAsync(Guid campgroundid)
+        {
+            var sqlSelect = $"SELECT imageid, campgroundid, url FROM {ImagesTable} WHERE campgroundid = @campgroundid";
+
+            return await _sqlClient.QueryAsync<ImageReadModel>(sqlSelect, new
+            {
+                campgroundid = campgroundid
+            });
+        }
+
         public async Task<CampgroundReadModel> GetItemByIdAsync(Guid campgroundid, Guid userid)
         {
             var sqlSelect = $"SELECT campgroundid, userid, name, price, description, datecreated FROM {CampgroundsTable} WHERE campgroundid = @campgroundid AND userid = @userid";
@@ -74,7 +85,7 @@ namespace Persistence.Repositories
             });
         }
 
-        public async Task<int> SaveOrUpdate(CampgroundWriteModel campground)
+        public async Task<int> SaveOrUpdateAsync(CampgroundWriteModel campground)
         {
             var sql = @$"INSERT INTO {CampgroundsTable} (campgroundid, userid, name, price, description, datecreated) VALUES(@campgroundid, @userid, @name, @price, @description, @datecreated) ON DUPLICATE KEY UPDATE name = @name, description = @description, price = @price";
 

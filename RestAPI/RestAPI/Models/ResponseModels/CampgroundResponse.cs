@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace RestAPI.Models.ResponseModels
 {
@@ -11,6 +12,8 @@ namespace RestAPI.Models.ResponseModels
         public string Name { get; set; }
 
         public double Price { get; set; }
+
+        public IEnumerable<ImageResponse> Images { get; set; }
 
         public string Description { get; set; }
 

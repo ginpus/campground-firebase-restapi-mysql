@@ -2,6 +2,7 @@
 using Domain.Models.ResponseModels;
 using Persistence.Repositories;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,25 +33,61 @@ namespace Domain.Services
             return rowsAffected;
         }
 
-        public Task<int> EditAsync(Guid campgroundid, Guid userid, UpdateCampgroundRequestModel campground)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<IEnumerable<CampgroundResponseModel>> GetAllUserItemsAsync(Guid userid)
         {
-            var allItems = (await _campgroundsRepository.GetAllUserItemsAsync(userid))
-                .Select(item => item.AsDto());
+            var allItems = await _campgroundsRepository.GetAllUserItemsAsync(userid);
 
-            return allItems;
+            var allCampgrounds = new List<CampgroundResponseModel>();
+
+            foreach (var item in allItems)
+            {
+                var allImages = (await _campgroundsRepository.GetImagesByCampgroundIdAsync(item.CampgroundId))
+                    .Select(image => image.AsDto());
+
+                var campground = new CampgroundResponseModel
+                {
+                    CampgroundId = item.CampgroundId,
+                    UserId = item.UserId,
+                    Name = item.Name,
+                    Price = item.Price,
+                    Images = allImages,
+                    Description = item.Description,
+                    DateCreated = item.DateCreated
+                };
+
+                allCampgrounds.Add(campground);
+            }
+
+            return allCampgrounds;
         }
 
         public async Task<IEnumerable<CampgroundResponseModel>> GetAllItemsAsync()
         {
-            var allItems = (await _campgroundsRepository.GetAllAsync())
-                .Select(item => item.AsDto());
+            var allItems = await _campgroundsRepository.GetAllAsync();
 
-            return allItems;
+            var allCampgrounds = new List<CampgroundResponseModel> { };
+
+            foreach (var item in allItems)
+            {
+                var allImages = (await _campgroundsRepository.GetImagesByCampgroundIdAsync(item.CampgroundId))
+                    .Select(image => image.AsDto());
+
+                var campground = new CampgroundResponseModel
+                {
+                    CampgroundId = item.CampgroundId,
+                    UserId = item.UserId,
+                    Name = item.Name,
+                    Price = item.Price,
+                    Images = allImages,
+                    Description = item.Description,
+                    DateCreated = item.DateCreated
+                };
+
+                allCampgrounds.Add(campground);
+            }
+
+            return allCampgrounds;
         }
 
         public async Task<CampgroundResponseModel> GetItemByIdAsync(Guid campgroundid, Guid userid)
@@ -72,9 +109,17 @@ namespace Domain.Services
                 DateCreated = campground.DateCreated
             };
 
-            var rowsAffected = await _campgroundsRepository.SaveOrUpdate(newCampground.AsDto());
+            var rowsAffected = await _campgroundsRepository.SaveOrUpdateAsync(newCampground.AsDto());
 
             return rowsAffected;
+        }
+
+        public async Task<IEnumerable<ImageResponseModel>> GetImagesByCampgroundIdAsync(Guid campgroundid)
+        {
+            var allImages = (await _campgroundsRepository.GetImagesByCampgroundIdAsync(campgroundid))
+                .Select(image => image.AsDto());
+
+            return allImages;
         }
     }
 }

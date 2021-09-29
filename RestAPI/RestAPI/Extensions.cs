@@ -31,5 +31,15 @@ namespace RestAPI
                 DateCreated = campground.DateCreated
             };
         }
+
+        public static ImageResponse AsDto(this ImageResponseModel image)
+        {
+            return new ImageResponse
+            {
+                ImageId = image.ImageId,
+                CampgroundId = image.CampgroundId,
+                Url = image.Url
+            };
+        }
     }
 }

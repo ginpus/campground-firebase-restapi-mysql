@@ -59,5 +59,15 @@ namespace Domain
                 DateCreated = campground.DateCreated
             };
         }
+
+        public static ImageResponseModel AsDto(this ImageReadModel image)
+        {
+            return new ImageResponseModel
+            {
+                ImageId = image.ImageId,
+                CampgroundId = image.CampgroundId,
+                Url = image.Url
+            };
+        }
     }
 }

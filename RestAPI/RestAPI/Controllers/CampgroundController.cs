@@ -72,16 +72,28 @@ namespace RestAPI.Controllers
 
             var user = await _userService.GetUserAsync(userId.Value);
 
-            var allCampgrounds = (await _campgroundsService.GetAllUserItemsAsync(user.UserId))
-                .Select(campground => new CampgroundResponse
+            var allItems = await _campgroundsService.GetAllUserItemsAsync(user.UserId);
+
+            var allCampgrounds = new List<CampgroundResponse> { };
+
+            foreach (var item in allItems)
+            {
+                var allImages = item.Images
+                    .Select(image => image.AsDto());
+
+                var campground = new CampgroundResponse
                 {
-                    CampgroundId = campground.CampgroundId,
-                    UserId = campground.UserId,
-                    Name = campground.Name,
-                    Price = campground.Price,
-                    Description = campground.Description,
-                    DateCreated = campground.DateCreated
-                });
+                    CampgroundId = item.CampgroundId,
+                    UserId = item.UserId,
+                    Name = item.Name,
+                    Price = item.Price,
+                    Images = allImages,
+                    Description = item.Description,
+                    DateCreated = item.DateCreated
+                };
+
+                allCampgrounds.Add(campground);
+            }
 
             return Ok(allCampgrounds);
         }
@@ -90,16 +102,28 @@ namespace RestAPI.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<CampgroundResponse>>> GetAllCampgrounds()
         {
-            var allCampgrounds = (await _campgroundsService.GetAllItemsAsync())
-                .Select(campground => new CampgroundResponse
+            var allItems = await _campgroundsService.GetAllItemsAsync();
+
+            var allCampgrounds = new List<CampgroundResponse> { };
+
+            foreach (var item in allItems)
+            {
+                var allImages = item.Images
+                    .Select(image => image.AsDto());
+
+                var campground = new CampgroundResponse
                 {
-                    CampgroundId = campground.CampgroundId,
-                    UserId = campground.UserId,
-                    Name = campground.Name,
-                    Price = campground.Price,
-                    Description = campground.Description,
-                    DateCreated = campground.DateCreated
-                });
+                    CampgroundId = item.CampgroundId,
+                    UserId = item.UserId,
+                    Name = item.Name,
+                    Price = item.Price,
+                    Images = allImages,
+                    Description = item.Description,
+                    DateCreated = item.DateCreated
+                };
+
+                allCampgrounds.Add(campground);
+            }
 
             return Ok(allCampgrounds);
         }
