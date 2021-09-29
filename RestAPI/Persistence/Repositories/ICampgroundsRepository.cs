@@ -25,5 +25,7 @@ namespace Persistence.Repositories
         Task<IEnumerable<ImageReadModel>> GetImagesByCampgroundIdAsync(Guid campgroundid);
 
         Task<int> DeleteAllRelatedImagesAsync(Guid campgroundid);
+
+        Task<int> SaveOrUpdateImageAsync(ImageWriteModel image);
     }
 }

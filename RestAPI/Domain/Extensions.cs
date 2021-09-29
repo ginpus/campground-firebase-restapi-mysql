@@ -69,5 +69,15 @@ namespace Domain
                 Url = image.Url
             };
         }
+
+        public static ImageWriteModel AsDto(this ImageRequestModel image)
+        {
+            return new ImageWriteModel
+            {
+                ImageId = image.ImageId,
+                CampgroundId = image.CampgroundId,
+                Url = image.Url
+            };
+        }
     }
 }

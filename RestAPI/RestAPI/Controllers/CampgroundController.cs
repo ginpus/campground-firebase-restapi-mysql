@@ -58,6 +58,33 @@ namespace RestAPI.Controllers
             return newCampground.AsDto();
         }
 
+        [HttpPost]
+        [Authorize]
+        [Route("image")]
+        public async Task<ActionResult<ImageResponse>> InsertCampgroundImage(Guid campgroundId, string url)
+        {
+            var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
+
+            if (userId is null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userService.GetUserAsync(userId.Value);
+
+            var newImage = new ImageRequestModel
+            {
+                ImageId = Guid.NewGuid(),
+                CampgroundId = campgroundId,
+                Url = url
+            };
+
+            var insertedImage = await _campgroundsService.CreateOrEditImageAsync(newImage, user.UserId);
+
+            return insertedImage.AsDto();
+        }
+
+
         [HttpGet]
         [Authorize]
         [Route("user")]

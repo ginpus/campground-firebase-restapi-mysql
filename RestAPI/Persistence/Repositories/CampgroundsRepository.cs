@@ -109,5 +109,19 @@ namespace Persistence.Repositories
 
             return await rowsAffected;
         }
+
+        public async Task<int> SaveOrUpdateImageAsync(ImageWriteModel image)
+        {
+            var sql = @$"INSERT INTO {ImagesTable} (imageid, campgroundid, url) VALUES(@imageid, @campgroundid, @url) ON DUPLICATE KEY UPDATE url = @url";
+
+            var rowsAffected = _sqlClient.ExecuteAsync(sql, new
+            {
+                imageid = image.ImageId,
+                campgroundid = image.CampgroundId,
+                url = image.Url
+            });
+
+            return await rowsAffected;
+        }
     }
 }

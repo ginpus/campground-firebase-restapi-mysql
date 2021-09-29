@@ -136,5 +136,36 @@ namespace Domain.Services
 
             return allImages;
         }
+
+        public async Task<ImageResponseModel> CreateOrEditImageAsync(ImageRequestModel image, Guid userId)
+        {
+            var allUserCampgrounds = await _campgroundsRepository.GetAllUserItemsAsync(userId);
+
+            var campgroundBelongsToUser = allUserCampgrounds.FirstOrDefault(userCampground => userCampground.CampgroundId == image.CampgroundId);
+
+            if (campgroundBelongsToUser is not null)
+            {
+                var newImage = new ImageRequestModel
+                {
+                    ImageId = image.ImageId,
+                    CampgroundId = image.CampgroundId,
+                    Url = image.Url
+                };
+
+                await _campgroundsRepository.SaveOrUpdateImageAsync(newImage.AsDto());
+
+                return new ImageResponseModel
+                {
+                    ImageId = newImage.ImageId,
+                    CampgroundId = newImage.CampgroundId,
+                    Url = newImage.Url
+                };
+            }
+            else
+            {
+                throw new Exception("There is no such campground for your user");
+            }
+
+        }
     }
 }
