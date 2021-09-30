@@ -1,15 +1,9 @@
 ﻿using Domain.Models.RequestModels;
-using Domain.Models.ResponseModels;
 using Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Persistence.Repositories;
-using RestAPI.Client;
-using RestAPI.Client.Models.ResponseModels;
 using RestAPI.Models.RequestModels;
 using RestAPI.Models.ResponseModels;
-using RestAPI.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,36 +52,9 @@ namespace RestAPI.Controllers
             return newCampground.AsDto();
         }
 
-        [HttpPost]
-        [Authorize]
-        [Route("image")]
-        public async Task<ActionResult<ImageResponse>> InsertCampgroundImage(Guid campgroundId, string url)
-        {
-            var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
-
-            if (userId is null)
-            {
-                return NotFound();
-            }
-
-            var user = await _userService.GetUserAsync(userId.Value);
-
-            var newImage = new ImageRequestModel
-            {
-                ImageId = Guid.NewGuid(),
-                CampgroundId = campgroundId,
-                Url = url
-            };
-
-            var insertedImage = await _campgroundsService.CreateOrEditImageAsync(newImage, user.UserId);
-
-            return insertedImage.AsDto();
-        }
-
-
         [HttpGet]
         [Authorize]
-        [Route("user")]
+        [Route("byUser")]
         public async Task<ActionResult<IEnumerable<CampgroundResponse>>> GetAllUserCampgrounds()
         {
             var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
@@ -190,30 +157,6 @@ namespace RestAPI.Controllers
             var entryDeleted = await _campgroundsService.DeleteAsync(campgroundId, user.UserId);
 
             return entryDeleted;
-        }
-
-        [HttpDelete]
-        [Authorize]
-        [Route("image/{imageId}")]
-        public async Task<ActionResult<int>> DeleteCampgroundImage(Guid imageId)
-        {
-            var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
-
-            if (userId is null)
-            {
-                return NotFound();
-            }
-
-            var user = await _userService.GetUserAsync(userId.Value);
-
-            var entryDeleted = await _campgroundsService.DeleteImageAsync(imageId, user.UserId);
-
-            if (entryDeleted == 0)
-            {
-                return BadRequest("No such image found for your user");
-            }
-
-            return Ok(entryDeleted);
         }
 
         [HttpPut]
