@@ -192,24 +192,29 @@ namespace RestAPI.Controllers
             return entryDeleted;
         }
 
-        /*        [HttpDelete]
-                [Authorize]
-                [Route("image/{imageId}")]
-                public async Task<ActionResult<int>> DeleteCampgroundImage(Guid imageId)
-                {
-                    var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
+        [HttpDelete]
+        [Authorize]
+        [Route("image/{imageId}")]
+        public async Task<ActionResult<int>> DeleteCampgroundImage(Guid imageId)
+        {
+            var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
 
-                    if (userId is null)
-                    {
-                        return NotFound();
-                    }
+            if (userId is null)
+            {
+                return NotFound();
+            }
 
-                    var user = await _userService.GetUserAsync(userId.Value);
+            var user = await _userService.GetUserAsync(userId.Value);
 
-                    var entryDeleted = await _campgroundsService.DeleteImageAsync(imageId, user.UserId);
+            var entryDeleted = await _campgroundsService.DeleteImageAsync(imageId, user.UserId);
 
-                    return entryDeleted;
-                }*/
+            if (entryDeleted == 0)
+            {
+                return BadRequest("No such image found for your user");
+            }
+
+            return Ok(entryDeleted);
+        }
 
         [HttpPut]
         [Authorize]

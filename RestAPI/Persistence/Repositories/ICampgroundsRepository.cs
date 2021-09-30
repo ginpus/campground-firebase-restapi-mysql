@@ -29,5 +29,7 @@ namespace Persistence.Repositories
         Task<int> SaveOrUpdateImageAsync(ImageWriteModel image);
 
         Task<int> DeleteImageAsync(Guid imageid);
+
+        Task<Guid> GetUserFromImageId(Guid imageid);
     }
 }

@@ -135,5 +135,15 @@ namespace Persistence.Repositories
 
             return await rowsAffected;
         }
+
+        public async Task<Guid> GetUserFromImageId(Guid imageid)
+        {
+            var sql = @$"SELECT {CampgroundsTable}.userid FROM {CampgroundsTable} JOIN {ImagesTable} ON {CampgroundsTable}.campgroundid = {ImagesTable}.campgroundid where {ImagesTable}.imageid = @imageid";
+
+            return await _sqlClient.QueryFirstOrDefaultAsync<Guid>(sql, new
+            {
+                imageid = imageid
+            });
+        }
     }
 }
