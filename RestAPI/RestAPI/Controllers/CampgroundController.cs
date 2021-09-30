@@ -93,7 +93,31 @@ namespace RestAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Route("{campgroundId}")]
+        public async Task<ActionResult<CampgroundResponse>> GetCampground(Guid campgroundId)
+        {
+            var item = await _campgroundsService.GetCampgroundAsync(campgroundId);
+
+            var allImages = item.Images
+                .Select(image => image.AsDto());
+
+            var campground = new CampgroundResponse
+            {
+                CampgroundId = item.CampgroundId,
+                UserId = item.UserId,
+                Name = item.Name,
+                Price = item.Price,
+                Images = allImages,
+                Description = item.Description,
+                DateCreated = item.DateCreated
+            };
+
+            return Ok(campground);
+        }
+
+
+        [HttpGet]
+        //       [Authorize]
         public async Task<ActionResult<IEnumerable<CampgroundResponse>>> GetAllCampgrounds()
         {
             var allItems = await _campgroundsService.GetAllItemsAsync();
@@ -173,7 +197,7 @@ namespace RestAPI.Controllers
 
             var user = await _userService.GetUserAsync(userId.Value);
 
-            var campgroundToUpdate = await _campgroundsService.GetItemByIdAsync(campgroundId, user.UserId);
+            var campgroundToUpdate = await _campgroundsService.GetCampgroundByIdAsync(campgroundId, user.UserId);
 
             if (campgroundToUpdate is null)
             {

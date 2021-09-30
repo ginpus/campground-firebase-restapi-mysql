@@ -10,7 +10,9 @@ namespace Domain.Services
 {
     public interface ICampgroundsService
     {
-        Task<CampgroundResponseModel> GetItemByIdAsync(Guid campgroundid, Guid userid);
+        Task<CampgroundResponseModel> GetCampgroundByIdAsync(Guid campgroundid, Guid userid);
+
+        Task<CampgroundResponseModel> GetCampgroundAsync(Guid campgroundid);
 
         Task<IEnumerable<ImageResponseModel>> GetImagesByCampgroundIdAsync(Guid campgroundid);
 

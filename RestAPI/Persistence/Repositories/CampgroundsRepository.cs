@@ -145,5 +145,15 @@ namespace Persistence.Repositories
                 imageid = imageid
             });
         }
+
+        public async Task<CampgroundReadModel> GetItemAsync(Guid campgroundid)
+        {
+            var sqlSelect = $"SELECT campgroundid, userid, name, price, description, datecreated FROM {CampgroundsTable} WHERE campgroundid = @campgroundid";
+
+            return await _sqlClient.QueryFirstOrDefaultAsync<CampgroundReadModel>(sqlSelect, new
+            {
+                campgroundid = campgroundid
+            });
+        }
     }
 }

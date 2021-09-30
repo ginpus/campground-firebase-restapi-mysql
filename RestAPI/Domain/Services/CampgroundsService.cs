@@ -48,35 +48,6 @@ namespace Domain.Services
             return rowsAffected;
         }
 
-
-        public async Task<IEnumerable<CampgroundResponseModel>> GetAllUserItemsAsync(Guid userid)
-        {
-            var allItems = await _campgroundsRepository.GetAllUserItemsAsync(userid);
-
-            var allCampgrounds = new List<CampgroundResponseModel>();
-
-            foreach (var item in allItems)
-            {
-                var allImages = (await _campgroundsRepository.GetImagesByCampgroundIdAsync(item.CampgroundId))
-                    .Select(image => image.AsDto());
-
-                var campground = new CampgroundResponseModel
-                {
-                    CampgroundId = item.CampgroundId,
-                    UserId = item.UserId,
-                    Name = item.Name,
-                    Price = item.Price,
-                    Images = allImages,
-                    Description = item.Description,
-                    DateCreated = item.DateCreated
-                };
-
-                allCampgrounds.Add(campground);
-            }
-
-            return allCampgrounds;
-        }
-
         public async Task<IEnumerable<CampgroundResponseModel>> GetAllItemsAsync()
         {
             var allItems = await _campgroundsRepository.GetAllAsync();
@@ -105,9 +76,23 @@ namespace Domain.Services
             return allCampgrounds;
         }
 
-        public async Task<CampgroundResponseModel> GetItemByIdAsync(Guid campgroundid, Guid userid)
+        public async Task<CampgroundResponseModel> GetCampgroundByIdAsync(Guid campgroundid, Guid userid)
         {
             var item = await _campgroundsRepository.GetItemByIdAsync(campgroundid, userid);
+
+            var allImages = (await _campgroundsRepository.GetImagesByCampgroundIdAsync(item.CampgroundId))
+                .Select(image => image.AsDto());
+
+            var campground = new CampgroundResponseModel
+            {
+                CampgroundId = item.CampgroundId,
+                UserId = item.UserId,
+                Name = item.Name,
+                Price = item.Price,
+                Images = allImages,
+                Description = item.Description,
+                DateCreated = item.DateCreated
+            };
 
             return item.AsDto();
         }
@@ -170,9 +155,6 @@ namespace Domain.Services
 
         public async Task<int> DeleteImageAsync(Guid imageid, Guid userid)
         {
-            var allUserCampgrounds = (await _campgroundsRepository.GetAllUserItemsAsync(userid))
-                .ToList();
-
             var userIdFromDb = await _campgroundsRepository.GetUserFromImageId(imageid);
 
             if (userIdFromDb == userid)
@@ -183,6 +165,56 @@ namespace Domain.Services
             }
 
             return 0;
+        }
+
+        public async Task<CampgroundResponseModel> GetCampgroundAsync(Guid campgroundid)
+        {
+            var item = await _campgroundsRepository.GetItemAsync(campgroundid);
+
+            var allImages = (await _campgroundsRepository.GetImagesByCampgroundIdAsync(item.CampgroundId))
+                .Select(image => image.AsDto());
+
+            var campground = new CampgroundResponseModel
+            {
+                CampgroundId = item.CampgroundId,
+                UserId = item.UserId,
+                Name = item.Name,
+                Price = item.Price,
+                Images = allImages,
+                Description = item.Description,
+                DateCreated = item.DateCreated
+            };
+
+
+            return campground;
+        }
+
+        public async Task<IEnumerable<CampgroundResponseModel>> GetAllUserItemsAsync(Guid userid)
+        {
+            var allItems = await _campgroundsRepository.GetAllUserItemsAsync(userid);
+
+            var allCampgrounds = new List<CampgroundResponseModel>();
+
+            foreach (var item in allItems)
+            {
+                var allImages = (await _campgroundsRepository.GetImagesByCampgroundIdAsync(item.CampgroundId))
+                    .Select(image => image.AsDto());
+
+                var campground = new CampgroundResponseModel
+                {
+                    CampgroundId = item.CampgroundId,
+                    UserId = item.UserId,
+                    Name = item.Name,
+                    Price = item.Price,
+                    Images = allImages,
+                    Description = item.Description,
+                    DateCreated = item.DateCreated
+                };
+
+                allCampgrounds.Add(campground);
+            }
+
+            return allCampgrounds;
         }
     }
 }
