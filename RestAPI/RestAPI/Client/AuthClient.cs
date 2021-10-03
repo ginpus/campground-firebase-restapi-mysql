@@ -19,14 +19,14 @@ namespace RestAPI.Client
             _apiKeySettings = apiKeySettings.Value;
         }
 
-        public async Task<CreateUserResponse> CreateUserAsync(string email, string password)
+        public async Task<CreateUserResponse> SignUpUserAsync(string email, string password)
         {
             var userCreds = new CreateUserRequest
-                {
-                    Email = email,
-                    Password = password,
-                    ReturnSecureToken = true
-                };
+            {
+                Email = email,
+                Password = password,
+                ReturnSecureToken = true
+            };
             var url = $"/v1/accounts:signUp?key={_apiKeySettings.WebApiKey}";
             var response = await _httpClient.PostAsJsonAsync(url, userCreds);
             return await response.Content.ReadFromJsonAsync<CreateUserResponse>();

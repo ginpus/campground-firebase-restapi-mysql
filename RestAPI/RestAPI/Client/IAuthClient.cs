@@ -5,7 +5,7 @@ namespace RestAPI.Client
 {
     public interface IAuthClient
     {
-        Task<CreateUserResponse> CreateUserAsync(string email, string password);
+        Task<CreateUserResponse> SignUpUserAsync(string email, string password);
 
         Task<SignInUserResponse> SignInUserAsync(string email, string password);
     }

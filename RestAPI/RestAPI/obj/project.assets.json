@@ -527,6 +527,16 @@
           }
         }
       },
+      "Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Contracts.dll": {}
+        }
+      },
       "Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -1593,6 +1603,11 @@
         "version.txt"
       ]
     },
+    "Contracts/1.0.0": {
+      "type": "project",
+      "path": "../Contracts/Contracts.csproj",
+      "msbuildProject": "../Contracts/Contracts.csproj"
+    },
     "Domain/1.0.0": {
       "type": "project",
       "path": "../Domain/Domain.csproj",
@@ -1606,6 +1621,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "Contracts >= 1.0.0",
       "Domain >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 5.0.10",
       "Microsoft.Extensions.Configuration >= 5.0.0",
@@ -1640,6 +1656,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
+            "C:\\Users\\Administrator\\Desktop\\c#\\campground-firebase-restapi-mysql\\RestAPI\\Contracts\\Contracts.csproj": {
+              "projectPath": "C:\\Users\\Administrator\\Desktop\\c#\\campground-firebase-restapi-mysql\\RestAPI\\Contracts\\Contracts.csproj"
+            },
             "C:\\Users\\Administrator\\Desktop\\c#\\campground-firebase-restapi-mysql\\RestAPI\\Domain\\Domain.csproj": {
               "projectPath": "C:\\Users\\Administrator\\Desktop\\c#\\campground-firebase-restapi-mysql\\RestAPI\\Domain\\Domain.csproj"
             }

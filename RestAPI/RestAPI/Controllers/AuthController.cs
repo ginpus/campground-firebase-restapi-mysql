@@ -1,4 +1,5 @@
-﻿using Domain.Models.RequestModels;
+﻿using Contracts.RequestModels;
+using Domain.Models.RequestModels;
 using Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,9 +35,9 @@ namespace RestAPI.Controllers
         [HttpPost]
         [Route("signUp")]
 
-        public async Task<ActionResult<CreateUserResponse>> CreateUser(string email, string password)
+        public async Task<ActionResult<CreateUserResponse>> SignUp(SignUpRequest request)
         {
-            var newUser = await _authClient.CreateUserAsync(email, password);
+            var newUser = await _authClient.SignUpUserAsync(request.Email, request.Password);
             await _userService.SaveUserAsync(new UserRequestModel
             {
                 Email = newUser.Email,
@@ -47,15 +48,9 @@ namespace RestAPI.Controllers
 
         [HttpPost]
         [Route("signIn")]
-        public async Task<ActionResult<SignInUserResponse>> SignIn(string email, string password)
+        public async Task<ActionResult<SignInUserResponse>> SignIn(SignInRequest request)
         {
-            return await _authClient.SignInUserAsync(email, password);
+            return await _authClient.SignInUserAsync(request.Email, request.Password);
         }
-
-        /*        [HttpGet]
-                public async Task<ActionResult<IEnumerable<ReturnUserResponse>>> ShowAllUsers()
-                {
-
-                }*/
     }
 }
