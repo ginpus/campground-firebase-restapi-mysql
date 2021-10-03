@@ -1,22 +1,22 @@
 ﻿using Microsoft.Extensions.Options;
-using RestAPI.Client.Models.RequestModels;
-using RestAPI.Client.Models.ResponseModels;
-using RestAPI.Options;
+using Domain.Client.Models.RequestModels;
+using Domain.Client.Models.ResponseModels;
+using Domain.Options;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
-namespace RestAPI.Client
+namespace Domain.Client
 {
     public class AuthClient : IAuthClient
     {
         private readonly HttpClient _httpClient;
-        private readonly ApiKeySettings _apiKeySettings;
+        private readonly FirebaseSettings _firebaseSettings;
 
-        public AuthClient(HttpClient httpClient, IOptions<ApiKeySettings> apiKeySettings)
+        public AuthClient(HttpClient httpClient, IOptions<FirebaseSettings> apiKeySettings)
         {
             _httpClient = httpClient;
-            _apiKeySettings = apiKeySettings.Value;
+            _firebaseSettings = apiKeySettings.Value;
         }
 
         public async Task<CreateUserResponse> SignUpUserAsync(string email, string password)
@@ -27,7 +27,7 @@ namespace RestAPI.Client
                 Password = password,
                 ReturnSecureToken = true
             };
-            var url = $"/v1/accounts:signUp?key={_apiKeySettings.WebApiKey}";
+            var url = $"{_firebaseSettings.BaseAddress}/v1/accounts:signUp?key={_firebaseSettings.WebApiKey}";
             var response = await _httpClient.PostAsJsonAsync(url, userCreds);
             return await response.Content.ReadFromJsonAsync<CreateUserResponse>();
         }
@@ -40,7 +40,7 @@ namespace RestAPI.Client
                 Password = password,
                 ReturnSecureToken = true
             };
-            var url = $"/v1/accounts:signInWithPassword?key={_apiKeySettings.WebApiKey}";
+            var url = $"{_firebaseSettings.BaseAddress}/v1/accounts:signInWithPassword?key={_firebaseSettings.WebApiKey}";
             var response = await _httpClient.PostAsJsonAsync(url, userCreds);
             return await response.Content.ReadFromJsonAsync<SignInUserResponse>();
         }

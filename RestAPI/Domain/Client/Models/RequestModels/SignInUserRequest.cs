@@ -1,8 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RestAPI.Client.Models.RequestModels
+namespace Domain.Client.Models.RequestModels
 {
-    public class CreateUserRequest
+    public class SignInUserRequest
     {
         [JsonPropertyName("email")]
         public string Email { get; set; }

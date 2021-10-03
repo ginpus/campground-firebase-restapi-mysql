@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cW+CPvWvuSq4E4Q3Vv0Vj0+k0f/mVbAfUovqnGU7ydkii5cWlOZMjugYhqif6l2vCFbjy/Z+Pmj7h3UCiE1mZQ==",
+  "dgSpecHash": "3O3P4AfjZc8PMnD09u5x6p29MGzrlGJLKVivDwLbRWF1nLwkUA+Vdkljg9Sukc+0UAF2yPWuqJq01m2yasWn5w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Administrator\\Desktop\\c#\\campground-firebase-restapi-mysql\\RestAPI\\RestAPI\\RestAPI.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,7 @@
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.2\\microsoft.extensions.dependencyinjection.5.0.2.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\6.7.1\\microsoft.identitymodel.jsonwebtokens.6.7.1.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.identitymodel.logging\\6.7.1\\microsoft.identitymodel.logging.6.7.1.nupkg.sha512",

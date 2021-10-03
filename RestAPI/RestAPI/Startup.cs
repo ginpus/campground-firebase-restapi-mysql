@@ -1,3 +1,5 @@
+using Domain.Client;
+using Domain.Options;
 using Domain.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -11,8 +13,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Persistence;
-using RestAPI.Client;
-using RestAPI.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,13 +36,9 @@ namespace RestAPI
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<ICampgroundsService, CampgroundsService>();
 
-            services.Configure<ApiKeySettings>(Configuration.GetSection("ApiKeySettings"));
+            services.Configure<FirebaseSettings>(Configuration.GetSection("Firebase"));
 
-            services.AddHttpClient<IAuthClient, AuthClient>(httpClient =>
-            {
-                httpClient.BaseAddress = new Uri("https://identitytoolkit.googleapis.com");
-                /*httpClient.DefaultRequestHeaders.Add("Authorization", "Token token=6ec3ac06e0c549325cffffbb6ff79c85");*/
-            });
+            services.AddHttpClient<IAuthClient, AuthClient>();
 
             services.AddControllers().AddJsonOptions(options => // required to represnet ENUM as string value (not as number)
             {

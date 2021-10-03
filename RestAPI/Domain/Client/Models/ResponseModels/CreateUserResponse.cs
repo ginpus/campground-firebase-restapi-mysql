@@ -1,8 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RestAPI.Client.Models.ResponseModels
+namespace Domain.Client.Models.ResponseModels
 {
-    public class ReturnUserResponse
+    public class CreateUserResponse
     {
         [JsonPropertyName("idToken")]
         public string IdToken { get; set; }
@@ -18,5 +18,10 @@ namespace RestAPI.Client.Models.ResponseModels
 
         [JsonPropertyName("localId")]
         public string LocalId { get; set; }
+
+        public override string ToString()
+        {
+            return $"idToken: {IdToken} \n email: {Email} \n refreshToken:{RefreshToken} \n expiresIn: {ExpiresIn} \n localId: {LocalId}";
+        }
     }
 }

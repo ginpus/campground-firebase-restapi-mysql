@@ -1,4 +1,5 @@
-﻿using Domain.Models.RequestModels;
+﻿using Domain.Client.Models.ResponseModels;
+using Domain.Models.RequestModels;
 using Domain.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,10 @@ namespace Domain.Services
 {
     public interface IUserService
     {
-        Task<UserResponseModel> SaveUserAsync(UserRequestModel user);
+        Task<UserResponseModel> SignUpAsync(UserRequestModel user);
 
         Task<UserResponseModel> GetUserAsync(string localId);
+
+        Task<SignInUserResponse> SignInUserAsync(UserRequestModel user);
     }
 }
