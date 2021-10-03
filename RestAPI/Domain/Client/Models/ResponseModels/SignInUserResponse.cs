@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RestAPI.Client.Models.ResponseModels
+namespace Domain.Client.Models.ResponseModels
 {
     public class SignInUserResponse
     {

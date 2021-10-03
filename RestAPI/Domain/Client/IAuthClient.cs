@@ -1,7 +1,7 @@
-﻿using RestAPI.Client.Models.ResponseModels;
+﻿using Domain.Client.Models.ResponseModels;
 using System.Threading.Tasks;
 
-namespace RestAPI.Client
+namespace Domain.Client
 {
     public interface IAuthClient
     {

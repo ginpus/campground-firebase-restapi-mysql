@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RestAPI.Options
+namespace Domain.Options
 {
-    public class ApiKeySettings
+    public class FirebaseSettings
     {
         public string WebApiKey { get; set; }
+
+        public string BaseAddress { get; set; }
     }
 }

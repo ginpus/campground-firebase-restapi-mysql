@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bWHmaXoHu3d7hSTLpzgKVDW+rl4YuSch+wmAKBnQZTito0UFkW6qt9fTqBItSTQcn3bwOxsrq+GXyZFK6BOGsg==",
+  "dgSpecHash": "0c/Ygdk6f7uUhOCMNUGBWdJSQjnILXO6B4gA5lR5aXu3zjfDA14D2kBhnlKjIgZRQOQ6VMQAz/1TBsemeR7g9w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Administrator\\Desktop\\c#\\campground-firebase-restapi-mysql\\RestAPI\\Domain\\Domain.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,7 @@
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.2\\microsoft.extensions.dependencyinjection.5.0.2.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
