@@ -1,6 +1,14 @@
 ﻿using Contracts.RequestModels;
+using Contracts.ResponseModels;
+using Domain.Client;
+using Domain.Client.Models.RequestModels;
+using Domain.Client.Models.ResponseModels;
+using Domain.Models.RequestModels;
 using Domain.Services;
 using Moq;
+using Moq.Language;
+using Moq.Language.Flow;
+using Persistence.Models.ReadModels;
 using Persistence.Repositories;
 using System;
 using System.Collections.Generic;
@@ -17,30 +25,63 @@ namespace Domain.UnitTests.Services
         [Fact]
         public async Task SignInAsync_WithSignInRequest_ReturnSignInResponse()
         {
-            /*            //Arange - preparation of data, creation of models/classes
-                        var authClientMock = new Mock<IAuthClient>();
-                        var userRepositoryMock = new Mock<IUsersRepository>();
+            //Arange - preparation of data, creation of mock data model objects
+            var authClientMock = new Mock<IAuthClient>();
+            var userRepositoryMock = new Mock<IUsersRepository>();
 
-                        var signInrequest = new SignInRequest
-                        {
-                            Email = Guid.NewGuid().ToString(),
-                            Password = Guid.NewGuid().ToString()
-                        };
+            // expected input - data that would be provided to the tested method (in this case AuthService method SignIn)
+            var signInRequest = new SignInRequest
+            {
+                Email = Guid.NewGuid().ToString(),
+                Password = Guid.NewGuid().ToString()
+            };
 
-                        //Setup defines what is going to happen when the method will be called
-                        authClientMock
-                            .Setup(authClient => authClient
-                            .SignInAsync()
+            //expected output from authClient
+            var signInResponse = new ClientSignInUserResponse
+            {
+                IdToken = Guid.NewGuid().ToString(),
+                Email = signInRequest.Email,
+                LocalId = Guid.NewGuid().ToString()
+            };
 
-                        //sut - system under test
-                        var sut = new UserService(authClientMock.Object, userRepositoryMock.Object);
+            //expected output from userRepository
+            var userReadModel = new UserReadModel
+            {
+                UserId = Guid.NewGuid(),
+                LocalId = signInResponse.LocalId,
+                Email = signInResponse.Email,
+                DateCreated = DateTime.Now
+            };
 
-                        //Act - we call the method we want to test
+            //Setup defines what is going to happen when the method will be called
+            authClientMock
+                 .Setup(authClient => authClient
+                 .SignInUserAsync(signInRequest.Email, signInRequest.Password))
+                 .ReturnsAsync(signInResponse);
 
-                        var result = await sut.SignInAsync();
+            userRepositoryMock
+                .Setup(userRepository => userRepository
+                .GetUserAsync(signInResponse.LocalId))
+                .ReturnsAsync(userReadModel);
 
-                        //Assert - did the required methods were called, did the intended data were returned
-            */
+            var expectedResult = new SignInResponse
+            {
+                Email = userReadModel.Email,
+                IdToken = signInResponse.IdToken
+            };
+
+            //sut - system under test
+            var sut = new UserService(userRepositoryMock.Object, authClientMock.Object);
+
+            //Act - we call the method we want to test
+
+            var result = await sut.SignInUserAsync(signInRequest);
+
+            //Assert - did the required methods were called, did the intended data were returned
+
+            Assert.Equal(expectedResult.Email, result.Email);
+            Assert.Equal(expectedResult.IdToken, result.IdToken);
+
         }
     }
 }

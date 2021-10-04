@@ -43,23 +43,21 @@ namespace Domain.Client
             throw new FirebaseException(firebaseError.Error.Message, firebaseError.Error.StatusCode);
         }
 
-        public async Task<SignInUserResponse> SignInUserAsync(string email, string password)
+        public async Task<ClientSignInUserResponse> SignInUserAsync(string email, string password)
         {
-            var userCreds = new SignInUserRequest
+            var url = $"{_firebaseSettings.BaseAddress}/v1/accounts:signInWithPassword?key={_firebaseSettings.WebApiKey}";
+
+            var response = await _httpClient.PostAsJsonAsync(url, new FullSignInUserRequest
             {
                 Email = email,
                 Password = password,
                 ReturnSecureToken = true
-            };
-
-            var url = $"{_firebaseSettings.BaseAddress}/v1/accounts:signInWithPassword?key={_firebaseSettings.WebApiKey}";
-
-            var response = await _httpClient.PostAsJsonAsync(url, userCreds);
+            });
 
             if (response.IsSuccessStatusCode)
             {
                 return await
-                    response.Content.ReadFromJsonAsync<SignInUserResponse>();
+                    response.Content.ReadFromJsonAsync<ClientSignInUserResponse>();
             }
 
             var firebaseError = await response.Content.ReadFromJsonAsync<ErrorResponse>();

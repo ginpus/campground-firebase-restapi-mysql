@@ -2,7 +2,7 @@
 
 namespace Domain.Client.Models.ResponseModels
 {
-    public class SignInUserResponse
+    public class ClientSignInUserResponse
     {
         [JsonPropertyName("localId")]
         public string LocalId { get; set; }
@@ -10,13 +10,13 @@ namespace Domain.Client.Models.ResponseModels
         [JsonPropertyName("email")]
         public string Email { get; set; }
 
-        [JsonPropertyName("displayName")]
-        public string DisplayName { get; set; }
+        /*[JsonPropertyName("displayName")]
+        public string DisplayName { get; set; }*/
 
         [JsonPropertyName("idToken")]
         public string IdToken { get; set; }
 
-        [JsonPropertyName("registered")]
+        /*[JsonPropertyName("registered")]
         public bool Registered { get; set; }
 
         [JsonPropertyName("refreshToken")]
@@ -28,6 +28,6 @@ namespace Domain.Client.Models.ResponseModels
         public override string ToString()
         {
             return $"localId: {LocalId} \n email: {Email} \n displayName:{DisplayName} \n idToken: {IdToken} \n registered: {Registered} \n refreshToken: {RefreshToken} \n expiresIn: {ExpiresIn}";
-        }
+        }*/
     }
 }

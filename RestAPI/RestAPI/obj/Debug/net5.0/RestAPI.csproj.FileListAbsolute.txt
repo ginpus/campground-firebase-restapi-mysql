@@ -52,3 +52,5 @@ C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\Rest
 C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\RestAPI\bin\Debug\net5.0\Contracts.dll
 C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\RestAPI\bin\Debug\net5.0\Contracts.pdb
 C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\RestAPI\obj\Debug\net5.0\RestAPI.csproj.CopyComplete
+C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\RestAPI\bin\Debug\net5.0\Castle.Core.dll
+C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\RestAPI\bin\Debug\net5.0\Moq.dll

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Client.Models.ResponseModels;
+using Contracts.ResponseModels;
+using Contracts.RequestModels;
 
 namespace Domain.Services
 {
@@ -47,11 +49,17 @@ namespace Domain.Services
             return userToSave;
         }
 
-        public async Task<SignInUserResponse> SignInUserAsync(UserRequestModel user)
+        public async Task<SignInResponse> SignInUserAsync(SignInRequest user)
         {
             var returnedUser = await _authClient.SignInUserAsync(user.Email, user.Password);
 
-            return returnedUser;
+            var userFromDb = await _usersRepository.GetUserAsync(returnedUser.LocalId);
+
+            return new SignInResponse
+            {
+                Email = userFromDb.Email,
+                IdToken = returnedUser.IdToken
+            };
         }
     }
 }

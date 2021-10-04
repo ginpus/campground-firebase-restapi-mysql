@@ -1,4 +1,6 @@
-﻿using Domain.Client.Models.ResponseModels;
+﻿using Contracts.RequestModels;
+using Contracts.ResponseModels;
+using Domain.Client.Models.ResponseModels;
 using Domain.Models.RequestModels;
 using Domain.Models.ResponseModels;
 using System;
@@ -15,6 +17,6 @@ namespace Domain.Services
 
         Task<UserResponseModel> GetUserAsync(string localId);
 
-        Task<SignInUserResponse> SignInUserAsync(UserRequestModel user);
+        Task<SignInResponse> SignInUserAsync(SignInRequest user);
     }
 }

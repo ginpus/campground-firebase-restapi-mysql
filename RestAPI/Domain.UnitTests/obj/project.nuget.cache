@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/BzR+/nJBFwKGgbGhLXjWmsNkZQeDRwxMI+peJNBIZh4z3Gzgdfz0blg1lhfeZHnpnuF4Q48AUTqmLwcD6m9hw==",
+  "dgSpecHash": "sQzrtDDilPvNgl19KyTT3jvENm/+7HaX0wNPiBIwSXYt8vVMGu157Dsmmqrvzfx7HxAJpF0rzYn4TXESlEvYQg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Administrator\\Desktop\\c#\\campground-firebase-restapi-mysql\\RestAPI\\Domain.UnitTests\\Domain.UnitTests.csproj",
   "expectedPackageFiles": [

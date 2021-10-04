@@ -9,8 +9,5 @@ namespace Domain.Client.Models.RequestModels
 
         [JsonPropertyName("password")]
         public string Password { get; set; }
-
-        [JsonPropertyName("returnSecureToken")]
-        public bool ReturnSecureToken { get; set; }
     }
 }

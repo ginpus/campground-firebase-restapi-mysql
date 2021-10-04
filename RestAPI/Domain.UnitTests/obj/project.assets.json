@@ -2298,11 +2298,13 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "Contracts": "1.0.0",
           "Microsoft.AspNetCore.Http": "2.2.2",
           "Microsoft.Extensions.Configuration": "5.0.0",
           "Microsoft.Extensions.DependencyInjection": "5.0.2",
           "Microsoft.Extensions.Http": "5.0.0",
           "Microsoft.Extensions.Options": "5.0.0",
+          "Moq": "4.16.1",
           "Persistence": "1.0.0"
         },
         "compile": {

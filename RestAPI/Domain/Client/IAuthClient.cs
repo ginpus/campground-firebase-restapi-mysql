@@ -1,4 +1,5 @@
-﻿using Domain.Client.Models.ResponseModels;
+﻿using Domain.Client.Models.RequestModels;
+using Domain.Client.Models.ResponseModels;
 using System.Threading.Tasks;
 
 namespace Domain.Client
@@ -7,6 +8,6 @@ namespace Domain.Client
     {
         Task<CreateUserResponse> SignUpUserAsync(string email, string password);
 
-        Task<SignInUserResponse> SignInUserAsync(string email, string password);
+        Task<ClientSignInUserResponse> SignInUserAsync(string email, string password);
     }
 }

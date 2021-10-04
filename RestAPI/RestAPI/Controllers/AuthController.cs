@@ -4,6 +4,7 @@ using Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using Domain.Client.Models.ResponseModels;
 using System.Threading.Tasks;
+using Contracts.ResponseModels;
 
 namespace RestAPI.Controllers
 {
@@ -34,13 +35,9 @@ namespace RestAPI.Controllers
 
         [HttpPost]
         [Route("signIn")]
-        public async Task<ActionResult<SignInUserResponse>> SignIn(SignInRequest request)
+        public async Task<ActionResult<SignInResponse>> SignIn(SignInRequest request)
         {
-            var returnedUser = await _userService.SignInUserAsync(new UserRequestModel
-            {
-                Email = request.Email,
-                Password = request.Password
-            });
+            var returnedUser = await _userService.SignInUserAsync(request);
 
             return Ok(returnedUser);
         }
