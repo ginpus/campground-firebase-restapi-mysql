@@ -1,4 +1,4 @@
-﻿namespace RestAPI.Models.RequestModels
+﻿namespace Contracts.RequestModels
 {
     public class CampgroundCreateorUpdateRequest
     {

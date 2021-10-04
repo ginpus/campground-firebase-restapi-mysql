@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RestAPI.Models.ResponseModels
+namespace Contracts.ResponseModels
 {
     public class ImageResponse
     {

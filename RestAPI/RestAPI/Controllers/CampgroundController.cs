@@ -1,9 +1,9 @@
-﻿using Domain.Models.RequestModels;
+﻿using Contracts.RequestModels;
+using Contracts.ResponseModels;
+using Domain.Models.RequestModels;
 using Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RestAPI.Models.RequestModels;
-using RestAPI.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +49,7 @@ namespace RestAPI.Controllers
 
             await _campgroundsService.CreateOrEditAsync(newCampground);
 
-            return newCampground.AsDto();
+            return Ok(newCampground.AsDto());
         }
 
         [HttpGet]
@@ -117,31 +117,10 @@ namespace RestAPI.Controllers
 
 
         [HttpGet]
-        //       [Authorize]
-        public async Task<ActionResult<IEnumerable<CampgroundResponse>>> GetAllCampgrounds()
+        public async Task<ActionResult<IEnumerable<ShortCampgroundResponse>>> GetAllCampgrounds()
         {
-            var allItems = await _campgroundsService.GetAllItemsAsync();
-
-            var allCampgrounds = new List<CampgroundResponse> { };
-
-            foreach (var item in allItems)
-            {
-                var allImages = item.Images
-                    .Select(image => image.AsDto());
-
-                var campground = new CampgroundResponse
-                {
-                    CampgroundId = item.CampgroundId,
-                    UserId = item.UserId,
-                    Name = item.Name,
-                    Price = item.Price,
-                    Images = allImages,
-                    Description = item.Description,
-                    DateCreated = item.DateCreated
-                };
-
-                allCampgrounds.Add(campground);
-            }
+            var allCampgrounds = (await _campgroundsService.GetAllItemsAsync())
+                .Select(item => item.AsDto());
 
             return Ok(allCampgrounds);
         }

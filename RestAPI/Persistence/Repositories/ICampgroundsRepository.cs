@@ -33,5 +33,7 @@ namespace Persistence.Repositories
         Task<int> DeleteImageAsync(Guid imageid);
 
         Task<Guid> GetUserFromImageId(Guid imageid);
+
+        Task<IEnumerable<ImageReadModel>> GetAllImagesAsync();
     }
 }

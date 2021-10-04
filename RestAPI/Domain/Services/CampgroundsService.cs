@@ -48,32 +48,24 @@ namespace Domain.Services
             return rowsAffected;
         }
 
-        public async Task<IEnumerable<CampgroundResponseModel>> GetAllItemsAsync()
+        public async Task<IEnumerable<ShortCampgroundResponseModel>> GetAllItemsAsync()
         {
             var allItems = await _campgroundsRepository.GetAllAsync();
+            var allImages = (await _campgroundsRepository.GetAllImagesAsync())
+                .Select(image => image.AsDto());
 
-            var allCampgrounds = new List<CampgroundResponseModel> { };
-
-            foreach (var item in allItems)
+            var campgrounds = allItems.Select(campground => new ShortCampgroundResponseModel
             {
-                var allImages = (await _campgroundsRepository.GetImagesByCampgroundIdAsync(item.CampgroundId))
-                    .Select(image => image.AsDto());
+                CampgroundId = campground.CampgroundId,
+                UserId = campground.UserId,
+                Name = campground.Name,
+                Price = campground.Price,
+                DefaultImageUrl = allImages.FirstOrDefault(image => image.CampgroundId == campground.CampgroundId)?.Url, // returns only single image for each campground
+                Description = campground.Description,
+                DateCreated = campground.DateCreated
+            });
 
-                var campground = new CampgroundResponseModel
-                {
-                    CampgroundId = item.CampgroundId,
-                    UserId = item.UserId,
-                    Name = item.Name,
-                    Price = item.Price,
-                    Images = allImages,
-                    Description = item.Description,
-                    DateCreated = item.DateCreated
-                };
-
-                allCampgrounds.Add(campground);
-            }
-
-            return allCampgrounds;
+            return campgrounds;
         }
 
         public async Task<CampgroundResponseModel> GetCampgroundByIdAsync(Guid campgroundid, Guid userid)

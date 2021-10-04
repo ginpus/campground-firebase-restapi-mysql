@@ -20,7 +20,12 @@
       "ProjectGuid": "957bce6e-5299-4977-be04-3f7a5b40b2c3",
       "DisplayName": "Contracts",
       "ColorIndex": 3
+    },
+    "5e82a732-975a-4d8c-9ef5-1345db507d87": {
+      "ProjectGuid": "5e82a732-975a-4d8c-9ef5-1345db507d87",
+      "DisplayName": "Domain.UnitTests",
+      "ColorIndex": 4
     }
   },
-  "NextColorIndex": 4
+  "NextColorIndex": 5
 }

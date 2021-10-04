@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0c/Ygdk6f7uUhOCMNUGBWdJSQjnILXO6B4gA5lR5aXu3zjfDA14D2kBhnlKjIgZRQOQ6VMQAz/1TBsemeR7g9w==",
+  "dgSpecHash": "bwdxLgqBCxv9+WKxsV/ue811+NYhKFAyjV9vRkbmloT0DSkVv9Re450qwBeLq9mbtDGp+DrGZpZ17iwm5/8pbA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Administrator\\Desktop\\c#\\campground-firebase-restapi-mysql\\RestAPI\\Domain\\Domain.csproj",
   "expectedPackageFiles": [
@@ -10,12 +10,21 @@
     "C:\\Users\\Administrator\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\k4os.compression.lz4.streams\\1.1.11\\k4os.compression.lz4.streams.1.1.11.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\k4os.hash.xxhash\\1.0.6\\k4os.hash.xxhash.1.0.6.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.http\\2.2.2\\microsoft.aspnetcore.http.2.2.2.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.2.0\\microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.configuration\\5.0.0\\microsoft.extensions.configuration.5.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.2\\microsoft.extensions.dependencyinjection.5.0.2.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.http\\5.0.0\\microsoft.extensions.http.5.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.logging\\5.0.0\\microsoft.extensions.logging.5.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.objectpool\\2.2.0\\microsoft.extensions.objectpool.2.2.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.net.http.headers\\2.2.0\\microsoft.net.http.headers.2.2.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\mysql.data\\8.0.26\\mysql.data.8.0.26.nupkg.sha512",
@@ -29,6 +38,7 @@
     "C:\\Users\\Administrator\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\system.text.encoding.codepages\\4.4.0\\system.text.encoding.codepages.4.4.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
   ],
   "logs": []

@@ -1,6 +1,6 @@
-﻿using Domain.Models.RequestModels;
+﻿using Contracts.ResponseModels;
+using Domain.Models.RequestModels;
 using Domain.Models.ResponseModels;
-using RestAPI.Models.ResponseModels;
 
 namespace RestAPI
 {
@@ -39,6 +39,20 @@ namespace RestAPI
                 ImageId = image.ImageId,
                 CampgroundId = image.CampgroundId,
                 Url = image.Url
+            };
+        }
+
+        public static ShortCampgroundResponse AsDto(this ShortCampgroundResponseModel campground)
+        {
+            return new ShortCampgroundResponse
+            {
+                CampgroundId = campground.CampgroundId,
+                UserId = campground.UserId,
+                Name = campground.Name,
+                Price = campground.Price,
+                DefaultImageUrl = campground.DefaultImageUrl,
+                Description = campground.Description,
+                DateCreated = campground.DateCreated
             };
         }
     }

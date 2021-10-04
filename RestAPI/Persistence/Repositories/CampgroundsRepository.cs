@@ -155,5 +155,12 @@ namespace Persistence.Repositories
                 campgroundid = campgroundid
             });
         }
+
+        public async Task<IEnumerable<ImageReadModel>> GetAllImagesAsync()
+        {
+            var sqlSelect = $"SELECT imageid, campgroundid, url FROM {ImagesTable}";
+
+            return await _sqlClient.QueryAsync<ImageReadModel>(sqlSelect);
+        }
     }
 }

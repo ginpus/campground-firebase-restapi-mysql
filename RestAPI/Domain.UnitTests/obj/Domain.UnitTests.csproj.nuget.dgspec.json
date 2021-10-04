@@ -185,6 +185,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[5.0.0, )"
@@ -192,6 +196,10 @@
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "Microsoft.Extensions.Options": {
               "target": "Package",

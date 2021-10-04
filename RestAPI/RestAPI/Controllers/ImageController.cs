@@ -1,8 +1,8 @@
-﻿using Domain.Models.RequestModels;
+﻿using Contracts.ResponseModels;
+using Domain.Models.RequestModels;
 using Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RestAPI.Models.ResponseModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

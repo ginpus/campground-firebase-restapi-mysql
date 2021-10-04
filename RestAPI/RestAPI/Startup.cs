@@ -1,3 +1,4 @@
+using Domain;
 using Domain.Client;
 using Domain.Options;
 using Domain.Services;
@@ -33,25 +34,19 @@ namespace RestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IUserService, UserService>();
-            services.AddSingleton<ICampgroundsService, CampgroundsService>();
 
-            services.Configure<FirebaseSettings>(Configuration.GetSection("Firebase"));
-
-            services.AddHttpClient<IAuthClient, AuthClient>();
-
-            services.AddControllers().AddJsonOptions(options => // required to represnet ENUM as string value (not as number)
+            services
+                .AddControllers()
+                .AddJsonOptions(options => // required to represnet ENUM as string value (not as number)
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 options.JsonSerializerOptions.IgnoreNullValues = true;
             });
 
-            services.AddPersistence(Configuration);
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestAPI", Version = "v1" });
-
+                //Authorization method
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
@@ -93,6 +88,13 @@ namespace RestAPI
                         ValidateLifetime = true
                     };
                 });
+
+            services.Configure<FirebaseSettings>(Configuration.GetSection("Firebase"));
+
+            services
+                .AddDomain()
+                .AddPersistence(Configuration);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

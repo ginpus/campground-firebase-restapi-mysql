@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RestAPI.Models.ResponseModels
+namespace Contracts.ResponseModels
 {
     public class CampgroundResponse
     {
