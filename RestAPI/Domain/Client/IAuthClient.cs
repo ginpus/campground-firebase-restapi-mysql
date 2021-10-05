@@ -11,6 +11,8 @@ namespace Domain.Client
 
         Task<ClientSignInUserResponse> SignInUserAsync(string email, string password);
 
-        Task<ClientChangePasswordResponse> ChangeUserPasswordAsync(ChangePasswordRequestModel request);
+        Task<ClientChangePasswordOrEmailResponse> ChangeUserPasswordAsync(ChangePasswordRequestModel request);
+
+        Task<ClientChangePasswordOrEmailResponse> ChangeUserEmailAsync(ChangeEmailRequestModel request);
     }
 }

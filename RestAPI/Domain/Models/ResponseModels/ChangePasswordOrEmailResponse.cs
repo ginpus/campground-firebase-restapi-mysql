@@ -5,9 +5,9 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Domain.Client.Models.ResponseModels
+namespace Domain.Models.ResponseModels
 {
-    public class ClientChangePasswordResponse
+    public class ChangePasswordOrEmailResponse
     {
         [JsonPropertyName("localId")]
         public string LocalId { get; set; }
@@ -17,13 +17,5 @@ namespace Domain.Client.Models.ResponseModels
 
         [JsonPropertyName("idToken")]
         public string IdToken { get; set; }
-
-/*        [JsonPropertyName("refreshToken")]
-        public string RefreshToken { get; set; }
-
-        [JsonPropertyName("expiresIn")]
-        public int ExpiresIn { get; set; }*/
-
-
     }
 }

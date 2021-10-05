@@ -81,7 +81,7 @@ namespace Domain
             };
         }
 
-        public static EditUserResponse AsDto(this ChangePasswordResponse user)
+        public static EditUserResponse AsDto(this ChangePasswordOrEmailResponse user)
         {
             return new EditUserResponse
             {
@@ -93,9 +93,9 @@ namespace Domain
 
 
 
-        public static ChangePasswordResponse AsDto(this ClientChangePasswordResponse user)
+        public static ChangePasswordOrEmailResponse AsDto(this ClientChangePasswordOrEmailResponse user)
         {
-            return new ChangePasswordResponse
+            return new ChangePasswordOrEmailResponse
             {
                 Email = user.Email,
                 LocalId = user.LocalId,

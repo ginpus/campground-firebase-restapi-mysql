@@ -19,6 +19,8 @@ namespace Domain.Services
 
         Task<SignInResponse> SignInUserAsync(SignInRequest user);
 
-        Task<ChangePasswordResponse> ChangePasswordAsync(ChangePasswordRequestModel request);
+        Task<ChangePasswordOrEmailResponse> ChangePasswordAsync(ChangePasswordRequestModel request);
+
+        Task<ChangePasswordOrEmailResponse> ChangeEmailAsync(Guid userId, ChangeEmailRequestModel request);
     }
 }

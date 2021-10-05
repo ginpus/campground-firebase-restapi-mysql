@@ -15,5 +15,7 @@ namespace Persistence.Repositories
         Task<int> CreateUserAysnc(UserWriteModel user);
 
         Task<IEnumerable<UserReadModel>> GetAllUsersAsync();
+
+        Task<int> EditEmailAsync(Guid userId, string newEmail);
     }
 }

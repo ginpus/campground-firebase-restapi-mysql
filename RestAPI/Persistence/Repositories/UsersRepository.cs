@@ -54,5 +54,18 @@ namespace Persistence.Repositories
 
             return user;
         }
+
+        public async Task<int> EditEmailAsync(Guid userId, string newEmail)
+        {
+            var sql = @$"UPDATE {UsersTable} SET email = @email WHERE userid = @userid";
+
+            var rowsAffected = _sqlClient.ExecuteAsync(sql, new
+            {
+                email = newEmail,
+                userid = userId
+            });
+
+            return await rowsAffected;
+        }
     }
 }

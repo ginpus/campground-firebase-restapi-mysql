@@ -62,12 +62,27 @@ namespace Domain.Services
             };
         }
 
-        public async Task<ChangePasswordResponse> ChangePasswordAsync(ChangePasswordRequestModel request)
+        public async Task<ChangePasswordOrEmailResponse> ChangePasswordAsync(ChangePasswordRequestModel request)
         {
             var response = await _authClient.ChangeUserPasswordAsync(request);
 
             return response.AsDto();
         }
 
+        public async Task<ChangePasswordOrEmailResponse> ChangeEmailAsync(Guid userId, ChangeEmailRequestModel request)
+        {
+            var updateDb = await _usersRepository.EditEmailAsync(userId, request.NewEmail);
+
+            if (updateDb != 0)
+            {
+                var response = await _authClient.ChangeUserEmailAsync(request);
+
+                return response.AsDto();
+            }
+            else
+            {
+                throw new Exception("Error while changing user email");
+            }
+        }
     }
 }

@@ -66,7 +66,7 @@ namespace Domain.Client
             throw new FirebaseException(firebaseError.Error.Message, firebaseError.Error.StatusCode);
         }
 
-        public async Task<ClientChangePasswordResponse> ChangeUserPasswordAsync(ChangePasswordRequestModel request)
+        public async Task<ClientChangePasswordOrEmailResponse> ChangeUserPasswordAsync(ChangePasswordRequestModel request)
         {
             var url = $"{_firebaseSettings.BaseAddress}/v1/accounts:update?key={_firebaseSettings.WebApiKey}";
 
@@ -75,7 +75,24 @@ namespace Domain.Client
             if (response.IsSuccessStatusCode)
             {
                 return await
-                    response.Content.ReadFromJsonAsync<ClientChangePasswordResponse>();
+                    response.Content.ReadFromJsonAsync<ClientChangePasswordOrEmailResponse>();
+            }
+
+            var firebaseError = await response.Content.ReadFromJsonAsync<ErrorResponse>();
+
+            throw new FirebaseException(firebaseError.Error.Message, firebaseError.Error.StatusCode);
+        }
+
+        public async Task<ClientChangePasswordOrEmailResponse> ChangeUserEmailAsync(ChangeEmailRequestModel request)
+        {
+            var url = $"{_firebaseSettings.BaseAddress}/v1/accounts:update?key={_firebaseSettings.WebApiKey}";
+
+            var response = await _httpClient.PostAsJsonAsync(url, request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await
+                    response.Content.ReadFromJsonAsync<ClientChangePasswordOrEmailResponse>();
             }
 
             var firebaseError = await response.Content.ReadFromJsonAsync<ErrorResponse>();

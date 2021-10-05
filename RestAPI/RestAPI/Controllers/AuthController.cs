@@ -49,28 +49,11 @@ namespace RestAPI.Controllers
 
         public async Task<ActionResult<EditUserResponse>> ChangePassword(ChangePasswordRequest request)
         {
-            var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
-
-            if (userId is null)
-            {
-                return NotFound();
-            }
-
-            var user = await _userService.GetUserAsync(userId.Value);
-
-            var firebaseIdentity = HttpContext.User.Claims.FirstOrDefault(claim => claim.Type == "firebase").Value;
-
-            FirebaseIdentity firebaseIdentityJson = (FirebaseIdentity)JsonSerializer.Deserialize(firebaseIdentity, typeof(FirebaseIdentity));
-
-            var userEmail = firebaseIdentityJson.Identities.Email.First();
-
             Request.Headers.TryGetValue("Authorization", out var idToken);
 
             //var idToken = this.GetHeaderData("Authorization");
 
-            var idTokenValue = idToken.ToString().Remove(0, 7);
-
-            System.Console.WriteLine($"Token from Request.Headers: {idTokenValue}");
+            var idTokenValue = idToken.ToString().Remove(0, 7); // removes 'Bearer ' from the header
 
             var response = await _userService.ChangePasswordAsync(new ChangePasswordRequestModel
             {
@@ -82,11 +65,59 @@ namespace RestAPI.Controllers
             return Ok(response);
         }
 
-        [HttpGet("GetHeaderData")]
-        public ActionResult<string> GetHeaderData(string headerKey)
+        [HttpPost]
+        [Route("changeEmail")]
+        [Authorize]
+
+        public async Task<ActionResult<EditUserResponse>> ChangeEmail(ChangeEmailRequest request)
         {
-            Request.Headers.TryGetValue(headerKey, out var headerValue);
-            return Ok(headerValue);
+            var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
+
+            if (userId is null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userService.GetUserAsync(userId.Value);
+
+            Request.Headers.TryGetValue("Authorization", out var idToken);
+
+            var idTokenValue = idToken.ToString().Remove(0, 7); // removes 'Bearer ' from the header
+
+            var response = await _userService.ChangeEmailAsync(user.UserId, new ChangeEmailRequestModel
+            {
+                IdToken = idTokenValue,
+                NewEmail = request.NewEmail,
+                ReturnSecureToken = true
+            });
+
+            return Ok(response);
         }
+
+        /*        [HttpGet("GetHeaderData")]
+                public ActionResult<string> GetHeaderData(string headerKey)
+                {
+                    Request.Headers.TryGetValue(headerKey, out var headerValue);
+                    return Ok(headerValue);
+                }
+        //----------------------------------get User ID value----------------------------------
+                     var userId = HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == "user_id");
+
+            if (userId is null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userService.GetUserAsync(userId.Value);
+        
+        //----------------------------------get User email value from request----------------------------------
+        
+            var firebaseIdentity = HttpContext.User.Claims.FirstOrDefault(claim => claim.Type == "firebase").Value;
+
+            FirebaseIdentity firebaseIdentityJson = (FirebaseIdentity)JsonSerializer.Deserialize(firebaseIdentity, typeof(FirebaseIdentity));
+
+            var userEmail = firebaseIdentityJson.Identities.Email.First();
+         
+         */
     }
 }
