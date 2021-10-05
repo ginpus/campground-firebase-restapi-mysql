@@ -64,14 +64,29 @@ namespace RestAPI.Controllers
 
             var userEmail = firebaseIdentityJson.Identities.Email.First();
 
+            Request.Headers.TryGetValue("Authorization", out var idToken);
+
+            //var idToken = this.GetHeaderData("Authorization");
+
+            var idTokenValue = idToken.ToString().Remove(0, 7);
+
+            System.Console.WriteLine($"Token from Request.Headers: {idTokenValue}");
+
             var response = await _userService.ChangePasswordAsync(new ChangePasswordRequestModel
             {
-                IdToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjM1MDM0MmIwMjU1MDAyYWI3NWUwNTM0YzU4MmVjYzY2Y2YwZTE3ZDIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2FtcGdyb3VuZGFwcC1naW5wdXMiLCJhdWQiOiJjYW1wZ3JvdW5kYXBwLWdpbnB1cyIsImF1dGhfdGltZSI6MTYzMzQyODUxOSwidXNlcl9pZCI6IkNqd3lQNlB5TjdQb1pkdXNSY3BLbHFBcU53eTIiLCJzdWIiOiJDand5UDZQeU43UG9aZHVzUmNwS2xxQXFOd3kyIiwiaWF0IjoxNjMzNDI4NTE5LCJleHAiOjE2MzM0MzIxMTksImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ0ZXN0QHRlc3QuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.iAWyU5R33TbhBNsBQLhucPmbQsj2L_NRWy3MAmvN3KwJt_xFI9j1CBKCMErHGijyNWKsPJkuxski4m9lIpFbfM5528qM7fHfZP8g9HHq3sdaK1cbaSmhN4m61vYPygvs5QZXJSSNY-rVs6GzfsMS1lxmsoAbCEEoPqMvJYbiLazt5FWxdQaHAtnOY7TOXbv7zqyPx3Eo7mwhkFMvkZS7GfrDew7IaJaCbeo4bsCk5WAc6wnPWfmQ85t7n7iun21LPdArzQXDAbxhDt5_mlZw0N1Kfvfl3nY7LdJq8Xd3Qdng-wYHXP8p4iUClU23c-4N3D55RGPoq8s95vurtBRvBg",
+                IdToken = idTokenValue,
                 NewPassword = request.NewPassword,
                 ReturnSecureToken = true
             });
 
             return Ok(response);
+        }
+
+        [HttpGet("GetHeaderData")]
+        public ActionResult<string> GetHeaderData(string headerKey)
+        {
+            Request.Headers.TryGetValue(headerKey, out var headerValue);
+            return Ok(headerValue);
         }
     }
 }

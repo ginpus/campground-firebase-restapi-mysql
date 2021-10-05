@@ -14,4 +14,3 @@ C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\Doma
 C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\Domain\bin\Debug\net5.0\Persistence.pdb
 C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\Domain\bin\Debug\net5.0\Contracts.dll
 C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\Domain\bin\Debug\net5.0\Contracts.pdb
-C:\Users\Administrator\Desktop\c#\campground-firebase-restapi-mysql\RestAPI\Domain\obj\Debug\net5.0\Domain.csproj.CopyComplete
