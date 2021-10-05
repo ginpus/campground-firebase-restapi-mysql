@@ -13,10 +13,12 @@ namespace Domain.Services
 {
     public interface IUserService
     {
-        Task<UserResponseModel> SignUpAsync(UserRequestModel user);
+        Task<UserResponseModel> SignUpAsync(SignUpRequest user);
 
         Task<UserResponseModel> GetUserAsync(string localId);
 
         Task<SignInResponse> SignInUserAsync(SignInRequest user);
+
+        Task<ChangePasswordResponse> ChangePasswordAsync(ChangePasswordRequestModel request);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Domain.Models.RequestModels;
+﻿using Domain.Client.Models.ResponseModels;
+using Domain.Models.RequestModels;
 using Domain.Models.ResponseModels;
 using Persistence.Models.ReadModels;
 using Persistence.Models.WriteModels;
@@ -77,6 +78,28 @@ namespace Domain
                 ImageId = image.ImageId,
                 CampgroundId = image.CampgroundId,
                 Url = image.Url
+            };
+        }
+
+        public static EditUserResponse AsDto(this ChangePasswordResponse user)
+        {
+            return new EditUserResponse
+            {
+                Email = user.Email,
+                LocalId = user.LocalId,
+                IdToken = user.IdToken
+            };
+        }
+
+
+
+        public static ChangePasswordResponse AsDto(this ClientChangePasswordResponse user)
+        {
+            return new ChangePasswordResponse
+            {
+                Email = user.Email,
+                LocalId = user.LocalId,
+                IdToken = user.IdToken
             };
         }
     }

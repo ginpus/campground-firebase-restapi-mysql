@@ -1,4 +1,5 @@
-﻿using Contracts.RequestModels;
+﻿using Contracts.GeneralModels;
+using Contracts.RequestModels;
 using Contracts.ResponseModels;
 using Domain.Models.RequestModels;
 using Domain.Services;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace RestAPI.Controllers

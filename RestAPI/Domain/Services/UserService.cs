@@ -31,7 +31,7 @@ namespace Domain.Services
             return user.AsDto();
         }
 
-        public async Task<UserResponseModel> SignUpAsync(UserRequestModel user)
+        public async Task<UserResponseModel> SignUpAsync(SignUpRequest user)
         {
 
             var newUser = await _authClient.SignUpUserAsync(user.Email, user.Password);
@@ -60,6 +60,13 @@ namespace Domain.Services
                 Email = userFromDb.Email,
                 IdToken = returnedUser.IdToken
             };
+        }
+
+        public async Task<ChangePasswordResponse> ChangePasswordAsync(ChangePasswordRequestModel request)
+        {
+            var response = await _authClient.ChangeUserPasswordAsync(request);
+
+            return response.AsDto();
         }
     }
 }
