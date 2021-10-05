@@ -53,7 +53,7 @@ namespace RestAPI.Controllers
 
             //var idToken = this.GetHeaderData("Authorization");
 
-            var idTokenValue = idToken.ToString().Remove(0, 7); // removes 'Bearer ' from the header
+            var idTokenValue = idToken.First().Remove(0, 7); // removes 'Bearer ' from the header
 
             var response = await _userService.ChangePasswordAsync(new ChangePasswordRequestModel
             {

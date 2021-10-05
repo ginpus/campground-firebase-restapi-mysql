@@ -25,6 +25,11 @@
       "ProjectGuid": "5e82a732-975a-4d8c-9ef5-1345db507d87",
       "DisplayName": "Domain.UnitTests",
       "ColorIndex": 4
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
     }
   },
   "NextColorIndex": 5
